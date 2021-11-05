@@ -1,0 +1,74 @@
+﻿@model API.Models.Credito
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Credito</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CRE_COD_MONEDA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRE_COD_MONEDA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRE_BANCO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRE_BANCO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRE_PLAZO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRE_PLAZO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRE_INICIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRE_INICIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRE_MONTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRE_MONTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CRE_INGRESOS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CRE_INGRESOS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Identificacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Identificacion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CRE_CODIGO }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

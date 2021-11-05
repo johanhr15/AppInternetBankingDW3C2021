@@ -21,6 +21,11 @@ namespace API.Models
             this.Error = new HashSet<Error>();
             this.Estadistica = new HashSet<Estadistica>();
             this.Sesion = new HashSet<Sesion>();
+            this.Certificado_Deposito = new HashSet<Certificado_Deposito>();
+            this.Compra_Casa = new HashSet<Compra_Casa>();
+            this.Credito = new HashSet<Credito>();
+            this.Sol_Tarjeta_Credito = new HashSet<Sol_Tarjeta_Credito>();
+            this.Traslado_Pensiones = new HashSet<Traslado_Pensiones>();
         }
     
         public int Codigo { get; set; }
@@ -40,5 +45,15 @@ namespace API.Models
         public virtual ICollection<Estadistica> Estadistica { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Sesion> Sesion { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Certificado_Deposito> Certificado_Deposito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Compra_Casa> Compra_Casa { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Credito> Credito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Sol_Tarjeta_Credito> Sol_Tarjeta_Credito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Traslado_Pensiones> Traslado_Pensiones { get; set; }
     }
 }

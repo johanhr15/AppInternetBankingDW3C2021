@@ -19,6 +19,9 @@ namespace API.Models
         {
             this.Pago = new HashSet<Pago>();
             this.Transferencia = new HashSet<Transferencia>();
+            this.Ahorro = new HashSet<Ahorro>();
+            this.Certificado_Deposito = new HashSet<Certificado_Deposito>();
+            this.Inversion = new HashSet<Inversion>();
         }
     
         public int Codigo { get; set; }
@@ -35,5 +38,11 @@ namespace API.Models
         public virtual ICollection<Pago> Pago { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transferencia> Transferencia { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Ahorro> Ahorro { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Certificado_Deposito> Certificado_Deposito { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inversion> Inversion { get; set; }
     }
 }

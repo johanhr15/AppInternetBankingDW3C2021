@@ -18,6 +18,7 @@ namespace API.Models
         public Moneda()
         {
             this.Cuenta = new HashSet<Cuenta>();
+            this.Compra_Casa = new HashSet<Compra_Casa>();
         }
     
         public int Codigo { get; set; }
@@ -26,5 +27,7 @@ namespace API.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cuenta> Cuenta { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Compra_Casa> Compra_Casa { get; set; }
     }
 }

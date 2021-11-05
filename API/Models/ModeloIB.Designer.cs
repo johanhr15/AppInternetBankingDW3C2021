@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\eherreran967\Desktop\AppInternetBankingDW3C2021\API\Models\ModeloIB.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\eherreran967\Desktop\Prod\AppInternetBankingDW3C2021\API\Models\ModeloIB.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

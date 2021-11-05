@@ -181,6 +181,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CreditoController.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\EstadisticasController.cs" />
@@ -193,10 +194,23 @@
     <Compile Include="Controllers\TokenGenerator.cs" />
     <Compile Include="Controllers\TokenValidationHandler.cs" />
     <Compile Include="Controllers\TransferenciasController.cs" />
+    <Compile Include="Controllers\Traslado_PensionesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ahorro.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Certificado_Deposito.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Compra_Casa.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Credito.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Cuenta.cs">
       <DependentUpon>ModeloIB.tt</DependentUpon>
@@ -207,7 +221,13 @@
     <Compile Include="Models\Estadistica.cs">
       <DependentUpon>ModeloIB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Inversion.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\Marchamo.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModeloIB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -235,10 +255,16 @@
     <Compile Include="Models\Sesion.cs">
       <DependentUpon>ModeloIB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Sol_Tarjeta_Credito.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ModeloIB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Transferencia.cs">
+      <DependentUpon>ModeloIB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Traslado_Pensiones.cs">
       <DependentUpon>ModeloIB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuario.cs">
@@ -314,6 +340,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Credito\Create.cshtml" />
+    <Content Include="Views\Credito\Delete.cshtml" />
+    <Content Include="Views\Credito\Details.cshtml" />
+    <Content Include="Views\Credito\Edit.cshtml" />
+    <Content Include="Views\Credito\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
