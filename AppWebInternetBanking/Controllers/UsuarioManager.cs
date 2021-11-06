@@ -14,6 +14,7 @@ namespace AppWebInternetBanking.Controllers
     {
         string UrlLogin = "http://localhost:49220/api/login/authenticate/";
         string UrlRegister = "http://localhost:49220/api/usuarios/";
+        string Url = "http://localhost:49220/api/Usuario/";
 
         public async Task<Usuario> Autenticar(LoginRequest loginRequest)
         {
@@ -35,6 +36,27 @@ namespace AppWebInternetBanking.Controllers
                 Encoding.UTF8,"application/json"));
 
             return JsonConvert.DeserializeObject<Usuario>(await response.Content.ReadAsStringAsync());
+        }
+
+        //INICIALIZAR EL HTTPCLIENT (REQUEST)
+        HttpClient GetClient(string token)
+        {
+            HttpClient httpClient = new HttpClient();
+
+            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+
+            return httpClient;
+        }
+
+        public async Task<IEnumerable<Usuario>> ObtenerUsuarios(string token)
+        {
+            HttpClient httpClient = GetClient(token);
+
+            var response = await
+                httpClient.GetStringAsync(Url);
+
+            return JsonConvert.DeserializeObject<IEnumerable<Usuario>>(response);
         }
     }
 }

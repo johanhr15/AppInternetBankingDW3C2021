@@ -216,7 +216,7 @@
           <Property Name="FechaNacimiento" Type="datetime" Nullable="false" />
           <Property Name="Estado" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Ahorro_Cuenta">
+        <Association Name="FK_Ahorro_Cuenta1">
           <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
           <End Role="Ahorro" Type="Self.Ahorro" Multiplicity="*" />
           <ReferentialConstraint>
@@ -225,18 +225,6 @@
             </Principal>
             <Dependent Role="Ahorro">
               <PropertyRef Name="CuentaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Certificado_Deposito_Cuenta">
-          <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
-          <End Role="Certificado_Deposito" Type="Self.Certificado_Deposito" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Certificado_Deposito">
-              <PropertyRef Name="CodigoCuenta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -252,19 +240,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Compra_Casa_Moneda">
-          <End Role="Moneda" Type="Self.Moneda" Multiplicity="1" />
-          <End Role="Compra_Casa" Type="Self.Compra_Casa" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Moneda">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Compra_Casa">
-              <PropertyRef Name="CodigoMoneda" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Compra_Casa_Usuario">
+        <Association Name="FK_Compra_Casa_Usuario1">
           <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
           <End Role="Compra_Casa" Type="Self.Compra_Casa" Multiplicity="*" />
           <ReferentialConstraint>
@@ -336,7 +312,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inversion_Cuenta">
+        <Association Name="FK_Inversion_Cuenta1">
           <End Role="Cuenta" Type="Self.Cuenta" Multiplicity="1" />
           <End Role="Inversion" Type="Self.Inversion" Multiplicity="*" />
           <ReferentialConstraint>
@@ -439,23 +415,15 @@
           <EntitySet Name="Transferencia" EntityType="Self.Transferencia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Traslado_Pensiones" EntityType="Self.Traslado_Pensiones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Ahorro_Cuenta" Association="Self.FK_Ahorro_Cuenta">
+          <AssociationSet Name="FK_Ahorro_Cuenta1" Association="Self.FK_Ahorro_Cuenta1">
             <End Role="Cuenta" EntitySet="Cuenta" />
             <End Role="Ahorro" EntitySet="Ahorro" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Certificado_Deposito_Cuenta" Association="Self.FK_Certificado_Deposito_Cuenta">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Certificado_Deposito" EntitySet="Certificado_Deposito" />
           </AssociationSet>
           <AssociationSet Name="FK_Certificado_Deposito_Usuario" Association="Self.FK_Certificado_Deposito_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Certificado_Deposito" EntitySet="Certificado_Deposito" />
           </AssociationSet>
-          <AssociationSet Name="FK_Compra_Casa_Moneda" Association="Self.FK_Compra_Casa_Moneda">
-            <End Role="Moneda" EntitySet="Moneda" />
-            <End Role="Compra_Casa" EntitySet="Compra_Casa" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Compra_Casa_Usuario" Association="Self.FK_Compra_Casa_Usuario">
+          <AssociationSet Name="FK_Compra_Casa_Usuario1" Association="Self.FK_Compra_Casa_Usuario1">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Compra_Casa" EntitySet="Compra_Casa" />
           </AssociationSet>
@@ -479,7 +447,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Estadistica" EntitySet="Estadistica" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inversion_Cuenta" Association="Self.FK_Inversion_Cuenta">
+          <AssociationSet Name="FK_Inversion_Cuenta1" Association="Self.FK_Inversion_Cuenta1">
             <End Role="Cuenta" EntitySet="Cuenta" />
             <End Role="Inversion" EntitySet="Inversion" />
           </AssociationSet>

@@ -50,6 +50,8 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">Mantenimiento
                 <span class="caret"></span></a>
                 <ul class="dropdown-menu">
+                  <li><a href="/Views/frmCredito.aspx">Credito</a></li>
+                    <li><a href="/Views/frmtrasladoPension.aspx">Traslado de Pensiones</a></li>
                   <li><a href="/Views/frmCuenta.aspx">Cuentas</a></li>
                   <li><a href="/Views/frmServicio.aspx">Servicios</a></li>
                   <li><a href="/Views/frmMoneda.aspx">Monedas</a></li>

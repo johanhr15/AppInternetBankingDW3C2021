@@ -54,6 +54,9 @@
     <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.12.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.12.2\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -92,9 +95,6 @@
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -194,6 +194,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\frmCredito.aspx" />
     <Content Include="Views\frmCuenta.aspx" />
     <Content Include="Views\frmMoneda.aspx" />
     <Content Include="Views\frmPago.aspx" />
@@ -202,6 +203,7 @@
     <Content Include="Views\frmReporteSesion.aspx" />
     <Content Include="Views\frmServicio.aspx" />
     <Content Include="Views\frmTransferencia.aspx" />
+    <Content Include="Views\frmtrasladoPension.aspx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
     <Content Include="Site.Mobile.Master" />
@@ -224,12 +226,14 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\CreditoManager.cs" />
     <Compile Include="Controllers\CuentaManager.cs" />
     <Compile Include="Controllers\ErrorManager.cs" />
     <Compile Include="Controllers\EstadisticaManager.cs" />
     <Compile Include="Controllers\MonedaManager.cs" />
     <Compile Include="Controllers\ServicioManager.cs" />
     <Compile Include="Controllers\SesionManager.cs" />
+    <Compile Include="Controllers\TrasladoPensionManager.cs" />
     <Compile Include="Controllers\UsuarioManager.cs" />
     <Compile Include="CustomErrors\frmError.aspx.cs">
       <DependentUpon>frmError.aspx</DependentUpon>
@@ -256,6 +260,7 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Correo.cs" />
+    <Compile Include="Models\Credito.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Estadistica.cs" />
@@ -265,6 +270,7 @@
     <Compile Include="Models\Servicio.cs" />
     <Compile Include="Models\Sesion.cs" />
     <Compile Include="Models\Transferencia.cs" />
+    <Compile Include="Models\Traslado_Pensiones.cs" />
     <Compile Include="Models\Usuario.cs" />
     <Compile Include="Models\UsuarioPartial.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -295,6 +301,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmCredito.aspx.cs">
+      <DependentUpon>frmCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmCredito.aspx.designer.cs">
+      <DependentUpon>frmCredito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmCuenta.aspx.cs">
       <DependentUpon>frmCuenta.aspx</DependentUpon>
@@ -351,6 +364,13 @@
     </Compile>
     <Compile Include="Views\frmTransferencia.aspx.designer.cs">
       <DependentUpon>frmTransferencia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmtrasladoPension.aspx.cs">
+      <DependentUpon>frmtrasladoPension.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmtrasladoPension.aspx.designer.cs">
+      <DependentUpon>frmtrasladoPension.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
