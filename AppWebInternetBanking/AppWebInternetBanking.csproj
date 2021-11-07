@@ -265,10 +265,12 @@
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Estadistica.cs" />
     <Compile Include="Models\LoginRequest.cs" />
+    <Compile Include="Models\Marchamo.cs" />
     <Compile Include="Models\Moneda.cs" />
     <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\Servicio.cs" />
     <Compile Include="Models\Sesion.cs" />
+    <Compile Include="Models\Sol_Tarjeta_Credito.cs" />
     <Compile Include="Models\Transferencia.cs" />
     <Compile Include="Models\Traslado_Pensiones.cs" />
     <Compile Include="Models\Usuario.cs" />
