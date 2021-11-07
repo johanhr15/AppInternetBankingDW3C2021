@@ -28,7 +28,7 @@
             });
         });
      </script> 
-    <h1>Mantenimiento de Creditos</h1>
+    <h1>Mantenimiento de Solicitud de Creditos</h1>
     <input id="myInput" placeholder="Buscar" class="form-control" type="text" />
     <asp:GridView ID="gvCreditos" runat="server" AutoGenerateColumns="false"
       CssClass="table table-sm" HeaderStyle-CssClass="thead-dark" 
@@ -97,7 +97,7 @@
                 </tr>
               <tr>
                     <td><asp:Literal ID="ltrFechaInicial" Text="Fecha Inicial del Credito" runat="server" /></td>
-                    <td><asp:TextBox TextMode="DateTime" ID="txtFecha" runat="server" CssClass="form-control"></asp:TextBox></td>
+                    <td><asp:TextBox TextMode="DateTimeLocal" ID="txtFecha" runat="server" CssClass="form-control"></asp:TextBox></td>
               </tr>
               <tr>
                     <td><asp:Literal ID="ltrMontoCredito" Text="Monto Total del Credito" runat="server"></asp:Literal></td>
@@ -107,7 +107,7 @@
                     ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtMontoCredito" EnableClientScript="False"></asp:RequiredFieldValidator></td>
                 </tr>
                 <tr>
-                    <td><asp:Literal ID="ltrIngresos" Text="Ingreos Netos Mensuales" runat="server"></asp:Literal></td>
+                    <td><asp:Literal ID="ltrIngresos" Text="Ingresos Netos Mensuales" runat="server"></asp:Literal></td>
                     <td><asp:TextBox ID="txtIngresos" TextMode="Number" runat="server" CssClass="form-control"></asp:TextBox></td>
                     <td>
                     <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"

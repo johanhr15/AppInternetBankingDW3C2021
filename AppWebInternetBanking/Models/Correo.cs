@@ -16,7 +16,7 @@ namespace AppWebInternetBanking.Models
             {
                 var client = new SmtpClient("smtp.gmail.com", 587)
                 {
-                    Credentials = new NetworkCredential("svillagra07@gmail.com", ""),
+                    Credentials = new NetworkCredential("disenoulacitinternetbanking@gmail.com", "Ulacit2021@"),
                     EnableSsl = true
                 };
 
@@ -30,15 +30,15 @@ namespace AppWebInternetBanking.Models
                                         "<div class=\"container\">" +
                                     "<div class=\"jumbotron\">" +
                                     "<h1>Internet Banking ULACIT</h1>" +
-                                    "<p>Inclusion de nuevo servicio</p>" +
+                                    "<p>Actividad Reciente:</p>" +
                                     "</div>" +
-                                    "<p>Se incluyo el servicio " + mensaje + ".</p>" +
+                                    "<p>" + mensaje + "</p>" +
                                 "</div>" +
                                 "</body>" +
                                 "</html>";
 
                 MailMessage message = new MailMessage();
-                message.From = new MailAddress("svillagra07@gmail.com");
+                message.From = new MailAddress("disenoulacitinternetbanking@gmail.com");
                 message.To.Add(destinatario);
                 message.Subject = asunto;
                 message.IsBodyHtml = true;

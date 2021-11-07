@@ -81,14 +81,14 @@ namespace AppWebInternetBanking.Views
 
                         if (!string.IsNullOrEmpty(traslado_PensionIngresado.TRAS_CLIENTE_CORREO))
                         {
-                            lblResultado.Text = "Solicitud de traslado de Pensiones ingresado con exito";
+                            lblResultado.Text = "Solicitud de traslado de Pensiones ingresada con exito";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
                             InicializarControles();
 
                             Correo correo = new Correo();
-                            correo.Enviar("Ha solicitado un nuevo traslado de Pensiones con:", traslado_PensionIngresado.TRAS_FCL_DESTINO, "johanhr100@gmail.com",
+                            correo.Enviar("Ha solicitado un nuevo traslado de Pensiones","Su entidad de destino para su FCL es: "+ traslado_PensionIngresado.TRAS_FCL_DESTINO, "johanhr100@gmail.com",
                                 Convert.ToInt32(Session["CodigoUsuario"].ToString()));
 
                             ScriptManager.RegisterStartupScript(this,
@@ -103,7 +103,7 @@ namespace AppWebInternetBanking.Views
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Text = "Los datos ingresados son erroneos";
                         lblResultado.Visible = true;
                         lblResultado.ForeColor = Color.Maroon;
                     }
@@ -137,14 +137,14 @@ namespace AppWebInternetBanking.Views
 
                         if (!string.IsNullOrEmpty(traslado_PensionActualizado.TRAS_CLIENTE_CORREO))
                         {
-                            lblResultado.Text = "Solicitud de traslado de Pensiones actualizado con exito";
+                            lblResultado.Text = "Solicitud de traslado de Pensiones actualizada con exito";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
                             InicializarControles();
 
                             Correo correo = new Correo();
-                            correo.Enviar("Solicitud de traslado de Pensiones actualizada con exito", traslado_PensionActualizado.TRAS_FCL_DESTINO, "svillagra07@gmail.com",
+                            correo.Enviar("Solicitud de traslado de Pensiones actualizada con exito", "Su entidad de destino para su FCL es: " + traslado_PensionActualizado.TRAS_FCL_DESTINO, "johanhr100@gmail.com",
                                 Convert.ToInt32(Session["CodigoUsuario"].ToString()));
 
                             ScriptManager.RegisterStartupScript(this,
@@ -152,21 +152,21 @@ namespace AppWebInternetBanking.Views
                         }
                         else
                         {
-                            lblResultado.Text = "Hubo un error al efectuar la operacion1";
+                            lblResultado.Text = "Hubo un error al efectuar la operacion";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Maroon;
                         }
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Text = "Los datos ingresados son erroneos";
                         lblResultado.Visible = true;
                         lblResultado.ForeColor = Color.Maroon;
                     }
                 }
                 catch
                 {
-                    lblResultado.Text = "Hubo un error al efectuar la operacion2";
+                    lblResultado.Text = "Hubo un error al efectuar la operacion";
                     lblResultado.Visible = true;
                     lblResultado.ForeColor = Color.Maroon;
 
@@ -177,6 +177,7 @@ namespace AppWebInternetBanking.Views
         protected void btnCancelarMant_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseMantenimiento(); });", true);
+            
         }
 
         protected async void btnAceptarModal_Click(object sender, EventArgs e)
@@ -214,6 +215,7 @@ namespace AppWebInternetBanking.Views
         protected void btnCancelarModal_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
+            
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)

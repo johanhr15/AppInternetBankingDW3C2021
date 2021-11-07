@@ -42,7 +42,7 @@ namespace AppWebInternetBanking.Views
             }
             catch (Exception)
             {
-                lblStatus.Text = "Hubo un error al cargar la lista de servicios2";
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios";
                 lblStatus.Visible = true;
             }
 
@@ -57,7 +57,7 @@ namespace AppWebInternetBanking.Views
             }
             catch (Exception exc)
             {
-                lblStatus.Text = "Hubo un error al cargar la lista de servicios3. Detalle: " + exc.Message;
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
 
@@ -72,7 +72,7 @@ namespace AppWebInternetBanking.Views
             }
             catch (Exception exc)
             {
-                lblStatus.Text = "Hubo un error al cargar la lista de servicios4. Detalle: " + exc.Message;
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
 
@@ -84,7 +84,9 @@ namespace AppWebInternetBanking.Views
             {
                 try
                 {
-                    if (Convert.ToDateTime(txtFecha.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFecha.Text))
+                    if (Convert.ToDateTime(txtFecha.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFecha.Text) && 
+                        Convert.ToDecimal(txtMontoCredito.Text) >= 0 && Convert.ToDecimal(txtIngresos.Text) >= 0 && 
+                        Convert.ToDecimal(txtPlazos.Text) >= 1)
                     {
                         Credito credito = new Credito()
                         {
@@ -101,14 +103,14 @@ namespace AppWebInternetBanking.Views
 
                         if (!string.IsNullOrEmpty(creditoIngresado.CRE_BANCO))
                         {
-                            lblResultado.Text = "Credito ingresado con exito";
+                            lblResultado.Text = "Solicitud de Credito ingresada con exito";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
                             InicializarControles();
 
                             Correo correo = new Correo();
-                            correo.Enviar("Ha solicitado un nuevo credito con:", creditoIngresado.CRE_BANCO, "johanhr100@gmail.com",
+                            correo.Enviar("Ha solicitado un nuevo credito", "Su solicitud de crédito ha sido enviada al Banco: "+ creditoIngresado.CRE_BANCO, "johanhr100@gmail.com",
                                 Convert.ToInt32(Session["CodigoUsuario"].ToString()));
 
                             ScriptManager.RegisterStartupScript(this,
@@ -123,7 +125,7 @@ namespace AppWebInternetBanking.Views
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Text = "Los datos ingresados son erroneos";
                         lblResultado.Visible = true;
                         lblResultado.ForeColor = Color.Maroon;
                     }
@@ -140,7 +142,9 @@ namespace AppWebInternetBanking.Views
             {
                 try
                 {
-                    if (Convert.ToDateTime(txtFecha.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFecha.Text))
+                    if (Convert.ToDateTime(txtFecha.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFecha.Text) &&
+                        Convert.ToDecimal(txtMontoCredito.Text) >= 0 && Convert.ToDecimal(txtIngresos.Text) >= 0 &&
+                        Convert.ToDecimal(txtPlazos.Text) >= 1)
                     {
                         Credito credito = new Credito()
                         {
@@ -159,14 +163,14 @@ namespace AppWebInternetBanking.Views
 
                         if (!string.IsNullOrEmpty(creditoActualizado.CRE_BANCO))
                         {
-                            lblResultado.Text = "Servicio actualizado con exito";
+                            lblResultado.Text = "Solicitud de Credito actualizada con exito";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
                             InicializarControles();
 
                             Correo correo = new Correo();
-                            correo.Enviar("Servicio actualizado con exito", creditoActualizado.CRE_BANCO, "svillagra07@gmail.com",
+                            correo.Enviar("Solicitud de Credito actualizada con exito", "Su solicitud de crédito ha sido enviada al Banco: " + creditoActualizado.CRE_BANCO, "johanhr100@gmail.com",
                                 Convert.ToInt32(Session["CodigoUsuario"].ToString()));
 
                             ScriptManager.RegisterStartupScript(this,
@@ -174,7 +178,7 @@ namespace AppWebInternetBanking.Views
                         }
                         else
                         {
-                            lblResultado.Text = "Hubo un error al efectuar la operacion1";
+                            lblResultado.Text = "Hubo un error al efectuar la operacion";
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Maroon;
                         }
@@ -182,14 +186,14 @@ namespace AppWebInternetBanking.Views
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Text = "Los datos ingresados son erroneos";
                         lblResultado.Visible = true;
                         lblResultado.ForeColor = Color.Maroon;
                     }
                 }
                 catch
                 {
-                    lblResultado.Text = "Hubo un error al efectuar la operacion2";
+                    lblResultado.Text = "Hubo un error al efectuar la operacion";
                     lblResultado.Visible = true;
                     lblResultado.ForeColor = Color.Maroon;
 
@@ -200,6 +204,7 @@ namespace AppWebInternetBanking.Views
         protected void btnCancelarMant_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseMantenimiento(); });", true);
+            
         }
 
         protected async void btnAceptarModal_Click(object sender, EventArgs e)
@@ -238,6 +243,7 @@ namespace AppWebInternetBanking.Views
         protected void btnCancelarModal_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
+            
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
