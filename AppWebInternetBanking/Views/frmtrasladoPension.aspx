@@ -28,7 +28,7 @@
             });
         });
      </script> 
-    <h1>Mantenimiento de Traslado de Afiliacion a Pensiones</h1>
+    <h1>Mantenimiento de Solicitud de Traslado a Afiliacion de Pensiones</h1>
     <input id="myInput" placeholder="Buscar" class="form-control" type="text" />
     <asp:GridView ID="gvtrasladoPensiones" runat="server" AutoGenerateColumns="false"
       CssClass="table table-sm" HeaderStyle-CssClass="thead-dark" 
@@ -98,7 +98,7 @@
                     </asp:DropDownList></td>
                </tr>
               <tr>
-                    <td><asp:Literal ID="ltrTRAS_FCL_DESTINO" Text="Entidad de Destino (ROP)" runat="server" /></td>
+                    <td><asp:Literal ID="ltrTRAS_FCL_DESTINO" Text="Entidad de Destino (FCL)" runat="server" /></td>
                     <td><asp:DropDownList ID="ddlTRAS_FCL_DESTINO" CssClass="form-control" runat="server">
                         <asp:ListItem Selected="True" Value="BCR">BCR Pensiones</asp:ListItem>
                         <asp:ListItem Value="CCSS">CCSS OP</asp:ListItem>
