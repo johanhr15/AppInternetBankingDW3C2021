@@ -12,17 +12,19 @@ using API.Models;
 
 namespace API.Controllers
 {
-    [Authorize]
+    
     public class UsuariosController : ApiController
     {
         private INTERNET_BANKING_DW1_3C2021Entities db = new INTERNET_BANKING_DW1_3C2021Entities();
 
+        [Authorize]
         // GET: api/Usuarios
         public IQueryable<Usuario> GetUsuario()
         {
             return db.Usuario;
         }
 
+        [Authorize]
         // GET: api/Usuarios/5
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult GetUsuario(int id)
@@ -37,6 +39,7 @@ namespace API.Controllers
         }
 
         // PUT: api/Usuarios/5
+        [Authorize]
         [ResponseType(typeof(void))]
         public IHttpActionResult PutUsuario(int id, Usuario usuario)
         {
@@ -72,6 +75,7 @@ namespace API.Controllers
         }
 
         // POST: api/Usuarios
+        [AllowAnonymous]
         [ResponseType(typeof(Usuario))]
         public IHttpActionResult PostUsuario(Usuario usuario)
         {

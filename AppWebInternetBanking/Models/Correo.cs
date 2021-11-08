@@ -14,11 +14,12 @@ namespace AppWebInternetBanking.Models
         {
             try
             {
-                var client = new SmtpClient("smtp.gmail.com", 587)
+                var client = new SmtpClient()
                 {
                     Credentials = new NetworkCredential("disenoulacitinternetbanking@gmail.com", "Ulacit2021@"),
                     EnableSsl = true
                 };
+
 
                 string htmlBody = "<!DOCTYPE html>" +
                                     "<head><meta charset=\"utf-8\"><meta name = \"viewport\" content = \"width=device-width, initial-scale=1\" >" +

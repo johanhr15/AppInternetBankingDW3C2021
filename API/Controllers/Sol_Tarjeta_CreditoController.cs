@@ -44,8 +44,8 @@ namespace API.Controllers
                         sol_Tarjeta_Credito.nombreEmpresa = sqlDataReader.GetString(6);
                         sol_Tarjeta_Credito.telefonoTrabajo = sqlDataReader.GetInt32(7);
                         sol_Tarjeta_Credito.puesto = sqlDataReader.GetString(8);
-                        sol_Tarjeta_Credito.tiempoLaborar = sqlDataReader.GetString(8);
-                        sol_Tarjeta_Credito.telefonoContacto = sqlDataReader.GetInt32(8);
+                        sol_Tarjeta_Credito.tiempoLaborar = sqlDataReader.GetString(9);
+                        sol_Tarjeta_Credito.telefonoContacto = sqlDataReader.GetInt32(10);
                         tarjetaCreditoList.Add(sol_Tarjeta_Credito);
                     }
 
@@ -75,7 +75,7 @@ namespace API.Controllers
                                                             from Sol_Tarjeta_Credito
                                                             where idSolTarjeta  = @idSolTarjeta", sqlConnection);
 
-                    sqlCommand.Parameters.AddWithValue("@idMarchamo", id);
+                    sqlCommand.Parameters.AddWithValue("@idSolTarjeta", id);
                     sqlConnection.Open();
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                     while (sqlDataReader.Read())
@@ -89,8 +89,8 @@ namespace API.Controllers
                         sol_Tarjeta_Credito.nombreEmpresa = sqlDataReader.GetString(6);
                         sol_Tarjeta_Credito.telefonoTrabajo = sqlDataReader.GetInt32(7);
                         sol_Tarjeta_Credito.puesto = sqlDataReader.GetString(8);
-                        sol_Tarjeta_Credito.tiempoLaborar = sqlDataReader.GetString(8);
-                        sol_Tarjeta_Credito.telefonoContacto = sqlDataReader.GetInt32(8);
+                        sol_Tarjeta_Credito.tiempoLaborar = sqlDataReader.GetString(9);
+                        sol_Tarjeta_Credito.telefonoContacto = sqlDataReader.GetInt32(10);
                     }
 
                     sqlConnection.Close();
@@ -120,7 +120,7 @@ namespace API.Controllers
                             SqlConnection(connectionString))
                         {
                             SqlCommand sqlCommand = new
-                                SqlCommand(@"update marchamo set cedula = @cedula,
+                                SqlCommand(@"update Sol_Tarjeta_Credito set cedula = @cedula,
                                                            fechaNacimiento = @fechaNacimiento,
                                                            ingresoMensual = @ingresoMensual,
                                                            condicionLaboral = @condicionLaboral,

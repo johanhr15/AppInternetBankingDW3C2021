@@ -55,6 +55,8 @@
                   <li><a href="/Views/frmCuenta.aspx">Cuentas</a></li>
                   <li><a href="/Views/frmServicio.aspx">Servicios</a></li>
                   <li><a href="/Views/frmMoneda.aspx">Monedas</a></li>
+                    <li><a href="/Views/frmMarchamo.aspx">Marchamos</a></li>
+                    <li><a href="/Views/frmSolTarjetaCredito.aspx">Solicitudes de tarjeta Credito</a></li>
                 </ul>
               </li>
               <li class="dropdown">
