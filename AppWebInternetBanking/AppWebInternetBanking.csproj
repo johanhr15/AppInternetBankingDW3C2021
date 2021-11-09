@@ -240,6 +240,8 @@
     <Compile Include="Controllers\RegExp.cs" />
     <Compile Include="Controllers\ServicioManager.cs" />
     <Compile Include="Controllers\SesionManager.cs" />
+    <Compile Include="Controllers\SolicitudCompraCasaManager.cs" />
+    <Compile Include="Controllers\SolTarjetaCreditoManager.cs" />
     <Compile Include="Controllers\TrasladoPensionManager.cs" />
     <Compile Include="Controllers\UsuarioManager.cs" />
     <Compile Include="CustomErrors\frmError.aspx.cs">
