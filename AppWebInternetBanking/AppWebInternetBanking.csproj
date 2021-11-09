@@ -280,9 +280,7 @@
     <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\Servicio.cs" />
     <Compile Include="Models\Sesion.cs" />
-    <Compile Include="Models\SolicitudCompraCasaManager.cs" />
     <Compile Include="Models\Solicitud_Compra_Casa.cs" />
-    <Compile Include="Models\SolTarjetaCreditoManager.cs" />
     <Compile Include="Models\Sol_Tarjeta_Credito.cs" />
     <Compile Include="Models\Transferencia.cs" />
     <Compile Include="Models\Traslado_Pensiones.cs" />
