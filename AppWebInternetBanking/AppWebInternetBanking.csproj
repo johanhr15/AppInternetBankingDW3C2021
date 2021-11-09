@@ -194,9 +194,11 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
     <Content Include="ViewSwitcher.ascx" />
+    <Content Include="Views\frmAhorro.aspx" />
     <Content Include="Views\frmCertificadoDeposito.aspx" />
     <Content Include="Views\frmCredito.aspx" />
     <Content Include="Views\frmCuenta.aspx" />
+    <Content Include="Views\frmInversion.aspx" />
     <Content Include="Views\frmMarchamo.aspx" />
     <Content Include="Views\frmMoneda.aspx" />
     <Content Include="Views\frmPago.aspx" />
@@ -230,11 +232,13 @@
     <Compile Include="Contact.aspx.designer.cs">
       <DependentUpon>Contact.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AhorroManager.cs" />
     <Compile Include="Controllers\CertificadoDepositoManager.cs" />
     <Compile Include="Controllers\CreditoManager.cs" />
     <Compile Include="Controllers\CuentaManager.cs" />
     <Compile Include="Controllers\ErrorManager.cs" />
     <Compile Include="Controllers\EstadisticaManager.cs" />
+    <Compile Include="Controllers\InversionManager.cs" />
     <Compile Include="Controllers\MarchamoManager.cs" />
     <Compile Include="Controllers\MonedaManager.cs" />
     <Compile Include="Controllers\RegExp.cs" />
@@ -268,12 +272,14 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Ahorro.cs" />
     <Compile Include="Models\CertificadoDeposito.cs" />
     <Compile Include="Models\Correo.cs" />
     <Compile Include="Models\Credito.cs" />
     <Compile Include="Models\Cuenta.cs" />
     <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Estadistica.cs" />
+    <Compile Include="Models\Inversion.cs" />
     <Compile Include="Models\LoginRequest.cs" />
     <Compile Include="Models\Marchamo.cs" />
     <Compile Include="Models\Moneda.cs" />
@@ -315,6 +321,13 @@
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmAhorro.aspx.cs">
+      <DependentUpon>frmAhorro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmAhorro.aspx.designer.cs">
+      <DependentUpon>frmAhorro.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmCertificadoDeposito.aspx.cs">
       <DependentUpon>frmCertificadoDeposito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -335,6 +348,13 @@
     </Compile>
     <Compile Include="Views\frmCuenta.aspx.designer.cs">
       <DependentUpon>frmCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmInversion.aspx.cs">
+      <DependentUpon>frmInversion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmInversion.aspx.designer.cs">
+      <DependentUpon>frmInversion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmMarchamo.aspx.cs">
       <DependentUpon>frmMarchamo.aspx</DependentUpon>
