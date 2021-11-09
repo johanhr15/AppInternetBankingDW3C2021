@@ -11,7 +11,7 @@ namespace AppWebInternetBanking.Controllers
 {
     public class MonedaManager
     {
-        string UrlBase = "http://localhost:49220/api/Monedas/";
+        string UrlBase = "http://localhost:49220/api/Moneda/";
 
         HttpClient GetClient(string token)
         {

@@ -1,119 +1,194 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 using API.Models;
 
 namespace API.Controllers
 {
     [Authorize]
-    public class MonedasController : ApiController
+    [RoutePrefix("api/Moneda")]
+    public class MonedaController : ApiController
     {
-        private INTERNET_BANKING_DW1_3C2021Entities db = new INTERNET_BANKING_DW1_3C2021Entities();
-
-        // GET: api/Monedas
-        public IQueryable<Moneda> GetMoneda()
+        [HttpGet]
+        public IHttpActionResult GetId(int id)
         {
-            return db.Moneda;
-        }
-
-        // GET: api/Monedas/5
-        [ResponseType(typeof(Moneda))]
-        public IHttpActionResult GetMoneda(int id)
-        {
-            Moneda moneda = db.Moneda.Find(id);
-            if (moneda == null)
+            Moneda moneda = new Moneda();
+            try
             {
-                return NotFound();
+                using (SqlConnection sqlConnection = new
+                    SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado
+                                                             FROM   Moneda
+                                                             WHERE Codigo = @Codigo", sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@Codigo", id);
+
+                    sqlConnection.Open();
+
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                    while (sqlDataReader.Read())
+                    {
+                        moneda.Codigo = sqlDataReader.GetInt32(0);
+                        moneda.Descripcion = sqlDataReader.GetString(1);
+                        moneda.Estado = sqlDataReader.GetString(2);
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
             }
 
             return Ok(moneda);
         }
 
-        // PUT: api/Monedas/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMoneda(int id, Moneda moneda)
+        [HttpGet]
+        public IHttpActionResult GetAll()
         {
-            if (!ModelState.IsValid)
+            List<Moneda> monedas = new List<Moneda>();
+            try
             {
-                return BadRequest(ModelState);
-            }
+                using (SqlConnection sqlConnection = new
+                    SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, Descripcion, Estado
+                                                            FROM   Moneda", sqlConnection);
+                    sqlConnection.Open();
 
-            if (id != moneda.Codigo)
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                    while (sqlDataReader.Read())
+                    {
+                        Moneda moneda = new Moneda();
+                        moneda.Codigo = sqlDataReader.GetInt32(0);
+                        moneda.Descripcion = sqlDataReader.GetString(1);
+                        moneda.Estado = sqlDataReader.GetString(2);
+
+                        monedas.Add(moneda);
+                    }
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
             {
+                return InternalServerError(ex);
+            }
+            return Ok(monedas);
+        }
+
+
+        [HttpPost]
+        public IHttpActionResult Ingresar(Moneda moneda)
+        {
+            if (moneda == null)
                 return BadRequest();
-            }
-
-            db.Entry(moneda).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MonedaExists(id))
+                using (SqlConnection sqlConnection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
                 {
-                    return NotFound();
+                    SqlCommand sqlCommand =
+                        new SqlCommand(@" INSERT INTO Moneda (Descripcion, Estado) 
+                                         VALUES (@Descripcion, @Estado)",
+                                         sqlConnection);
+
+
+                    sqlCommand.Parameters.AddWithValue("@Descripcion", moneda.Descripcion);
+                    sqlCommand.Parameters.AddWithValue("@Estado", moneda.Estado);
+
+                    sqlConnection.Open();
+
+                    int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
                 }
-                else
-                {
-                    throw;
-                }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Monedas
-        [ResponseType(typeof(Moneda))]
-        public IHttpActionResult PostMoneda(Moneda moneda)
-        {
-            if (!ModelState.IsValid)
+            catch (Exception ex)
             {
-                return BadRequest(ModelState);
+                return InternalServerError(ex);
             }
-
-            db.Moneda.Add(moneda);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = moneda.Codigo }, moneda);
-        }
-
-        // DELETE: api/Monedas/5
-        [ResponseType(typeof(Moneda))]
-        public IHttpActionResult DeleteMoneda(int id)
-        {
-            Moneda moneda = db.Moneda.Find(id);
-            if (moneda == null)
-            {
-                return NotFound();
-            }
-
-            db.Moneda.Remove(moneda);
-            db.SaveChanges();
 
             return Ok(moneda);
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpPut]
+        public IHttpActionResult Actualizar(Moneda moneda)
         {
-            if (disposing)
+            if (moneda == null)
+                return BadRequest();
+
+            try
             {
-                db.Dispose();
+                using (SqlConnection sqlConnection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand =
+                        new SqlCommand(@" UPDATE Moneda 
+                                                        SET 
+                                                            Descripcion = @Descripcion,
+                                                            Estado = @Estado 
+                                          WHERE Codigo = @Codigo",
+                                         sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@Codigo", moneda.Codigo);
+                    sqlCommand.Parameters.AddWithValue("@Descripcion", moneda.Descripcion);
+                    sqlCommand.Parameters.AddWithValue("@Estado", moneda.Estado);
+
+                    sqlConnection.Open();
+
+                    int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
             }
-            base.Dispose(disposing);
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(moneda);
         }
 
-        private bool MonedaExists(int id)
+        [HttpDelete]
+        public IHttpActionResult Eliminar(int id)
         {
-            return db.Moneda.Count(e => e.Codigo == id) > 0;
+            if (id < 1)
+                return BadRequest();
+
+            try
+            {
+                using (SqlConnection sqlConnection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand =
+                        new SqlCommand(@" DELETE Moneda WHERE Codigo = @Codigo",
+                                         sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@Codigo", id);
+
+                    sqlConnection.Open();
+
+                    int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(id);
         }
     }
 }

@@ -1,119 +1,215 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 using API.Models;
 
 namespace API.Controllers
 {
     [Authorize]
-    public class CuentasController : ApiController
+    [RoutePrefix("api/Cuenta")]
+    public class CuentaController : ApiController
     {
-        private INTERNET_BANKING_DW1_3C2021Entities db = new INTERNET_BANKING_DW1_3C2021Entities();
-
-        // GET: api/Cuentas
-        public IQueryable<Cuenta> GetCuenta()
+        [HttpGet]
+        public IHttpActionResult GetId(int id)
         {
-            return db.Cuenta;
-        }
-
-        // GET: api/Cuentas/5
-        [ResponseType(typeof(Cuenta))]
-        public IHttpActionResult GetCuenta(int id)
-        {
-            Cuenta cuenta = db.Cuenta.Find(id);
-            if (cuenta == null)
+            Cuenta cuenta = new Cuenta();
+            try
             {
-                return NotFound();
+                using (SqlConnection sqlConnection = new
+                    SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, CodigoUsuario, CodigoMoneda, 
+                                                             Descripcion, IBAN, Saldo, Estado
+                                                             FROM   Cuenta
+                                                             WHERE Codigo = @Codigo", sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@Codigo", id);
+
+                    sqlConnection.Open();
+
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                    while (sqlDataReader.Read())
+                    {
+                        cuenta.Codigo = sqlDataReader.GetInt32(0);
+                        cuenta.CodigoUsuario = sqlDataReader.GetInt32(1);
+                        cuenta.CodigoMoneda = sqlDataReader.GetInt32(2);
+                        cuenta.Descripcion = sqlDataReader.GetString(3);
+                        cuenta.IBAN = sqlDataReader.GetString(4);
+                        cuenta.Saldo = sqlDataReader.GetDecimal(5);
+                        cuenta.Estado = sqlDataReader.GetString(6);
+                    }
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
             }
 
             return Ok(cuenta);
         }
 
-        // PUT: api/Cuentas/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCuenta(int id, Cuenta cuenta)
+        [HttpGet]
+        public IHttpActionResult GetAll()
         {
-            if (!ModelState.IsValid)
+            List<Cuenta> cuentas = new List<Cuenta>();
+            try
             {
-                return BadRequest(ModelState);
-            }
+                using (SqlConnection sqlConnection = new
+                    SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand = new SqlCommand(@"SELECT Codigo, CodigoUsuario, CodigoMoneda, 
+                                                             Descripcion, IBAN, Saldo, Estado
+                                                             FROM   Cuenta", sqlConnection);
+                    sqlConnection.Open();
 
-            if (id != cuenta.Codigo)
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                    while (sqlDataReader.Read())
+                    {
+                        Cuenta cuenta = new Cuenta();
+                        cuenta.Codigo = sqlDataReader.GetInt32(0);
+                        cuenta.CodigoUsuario = sqlDataReader.GetInt32(1);
+                        cuenta.CodigoMoneda = sqlDataReader.GetInt32(2);
+                        cuenta.Descripcion = sqlDataReader.GetString(3);
+                        cuenta.IBAN = sqlDataReader.GetString(4);
+                        cuenta.Saldo = sqlDataReader.GetDecimal(5);
+                        cuenta.Estado = sqlDataReader.GetString(6);
+
+                        cuentas.Add(cuenta);
+                    }
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
             {
+                return InternalServerError(ex);
+            }
+            return Ok(cuentas);
+        }
+
+
+        [HttpPost]
+        public IHttpActionResult Ingresar(Cuenta cuenta)
+        {
+            if (cuenta == null)
                 return BadRequest();
-            }
-
-            db.Entry(cuenta).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CuentaExists(id))
+                using (SqlConnection sqlConnection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
                 {
-                    return NotFound();
+                    SqlCommand sqlCommand =
+                        new SqlCommand(@" INSERT INTO Cuenta (CodigoUsuario, CodigoMoneda, Descripcion, 
+                                                                IBAN, Saldo, Estado) 
+                                         VALUES (@CodigoUsuario, @CodigoMoneda, @Descripcion, @IBAN, @Saldo, @Estado)",
+                                         sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@CodigoUsuario", cuenta.CodigoUsuario);
+                    sqlCommand.Parameters.AddWithValue("@CodigoMoneda", cuenta.CodigoMoneda);
+                    sqlCommand.Parameters.AddWithValue("@Descripcion", cuenta.Descripcion);
+                    sqlCommand.Parameters.AddWithValue("@IBAN", cuenta.IBAN);
+                    sqlCommand.Parameters.AddWithValue("@Saldo", cuenta.Saldo);
+                    sqlCommand.Parameters.AddWithValue("@Estado", cuenta.Estado);
+
+                    sqlConnection.Open();
+
+                    int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
                 }
-                else
-                {
-                    throw;
-                }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Cuentas
-        [ResponseType(typeof(Cuenta))]
-        public IHttpActionResult PostCuenta(Cuenta cuenta)
-        {
-            if (!ModelState.IsValid)
+            catch (Exception ex)
             {
-                return BadRequest(ModelState);
+                return InternalServerError(ex);
             }
-
-            db.Cuenta.Add(cuenta);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = cuenta.Codigo }, cuenta);
-        }
-
-        // DELETE: api/Cuentas/5
-        [ResponseType(typeof(Cuenta))]
-        public IHttpActionResult DeleteCuenta(int id)
-        {
-            Cuenta cuenta = db.Cuenta.Find(id);
-            if (cuenta == null)
-            {
-                return NotFound();
-            }
-
-            db.Cuenta.Remove(cuenta);
-            db.SaveChanges();
 
             return Ok(cuenta);
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpPut]
+        public IHttpActionResult Actualizar(Cuenta cuenta)
         {
-            if (disposing)
+            if (cuenta == null)
+                return BadRequest();
+
+            try
             {
-                db.Dispose();
+                using (SqlConnection sqlConnection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand =
+                        new SqlCommand(@" UPDATE Cuenta 
+                                                        SET CodigoUsuario = @CodigoUsuario, 
+                                                            CodigoMoneda = @CodigoMoneda,
+                                                            Descripcion = @Descripcion, 
+                                                            IBAN = @IBAN, 
+                                                            Saldo = @Saldo, 
+                                                            Estado = @Estado 
+                                          WHERE Codigo = @Codigo",
+                                         sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@Codigo", cuenta.Codigo);
+                    sqlCommand.Parameters.AddWithValue("@CodigoUsuario", cuenta.CodigoUsuario);
+                    sqlCommand.Parameters.AddWithValue("@CodigoMoneda", cuenta.CodigoMoneda);
+                    sqlCommand.Parameters.AddWithValue("@Descripcion", cuenta.Descripcion);
+                    sqlCommand.Parameters.AddWithValue("@IBAN", cuenta.IBAN);
+                    sqlCommand.Parameters.AddWithValue("@Saldo", cuenta.Saldo);
+                    sqlCommand.Parameters.AddWithValue("@Estado", cuenta.Estado);
+
+                    sqlConnection.Open();
+
+                    int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
             }
-            base.Dispose(disposing);
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(cuenta);
         }
 
-        private bool CuentaExists(int id)
+        [HttpDelete]
+        public IHttpActionResult Eliminar(int id)
         {
-            return db.Cuenta.Count(e => e.Codigo == id) > 0;
+            if (id < 1)
+                return BadRequest();
+
+            try
+            {
+                using (SqlConnection sqlConnection =
+                    new SqlConnection(ConfigurationManager.ConnectionStrings["INTERNET_BANKING"].ConnectionString))
+                {
+                    SqlCommand sqlCommand =
+                        new SqlCommand(@" DELETE Cuenta WHERE Codigo = @Codigo",
+                                         sqlConnection);
+
+                    sqlCommand.Parameters.AddWithValue("@Codigo", id);
+
+                    sqlConnection.Open();
+
+                    int filasAfectadas = sqlCommand.ExecuteNonQuery();
+
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+
+            return Ok(id);
         }
     }
 }
