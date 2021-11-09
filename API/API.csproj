@@ -181,6 +181,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\CertificadoDepositoController.cs" />
     <Compile Include="Controllers\CreditoController.cs" />
     <Compile Include="Controllers\CuentasController.cs" />
     <Compile Include="Controllers\ErrorsController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Controllers\PagosController.cs" />
     <Compile Include="Controllers\ServiciosController.cs" />
     <Compile Include="Controllers\SesionsController.cs" />
+    <Compile Include="Controllers\SolicitudCompraCasaController.cs" />
     <Compile Include="Controllers\Sol_Tarjeta_CreditoController.cs" />
     <Compile Include="Controllers\TokenGenerator.cs" />
     <Compile Include="Controllers\TokenValidationHandler.cs" />
@@ -351,6 +353,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CertificadoDeposito\" />
+    <Folder Include="Views\SolicitudCompraCasa\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

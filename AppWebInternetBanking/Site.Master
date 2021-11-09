@@ -57,6 +57,8 @@
                   <li><a href="/Views/frmMoneda.aspx">Monedas</a></li>
                     <li><a href="/Views/frmMarchamo.aspx">Marchamos</a></li>
                     <li><a href="/Views/frmSolTarjetaCredito.aspx">Solicitudes de tarjeta Credito</a></li>
+                  <li><a href="/Views/frmCertificadoDeposito.aspx">Certificado Deposito</a></li>
+                  <li><a href="/Views/frmSolicitudCompraCasa.aspx">Solicitud Compra Casa</a></li>
                 </ul>
               </li>
               <li class="dropdown">
