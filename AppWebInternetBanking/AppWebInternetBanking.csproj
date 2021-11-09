@@ -280,7 +280,9 @@
     <Compile Include="Models\Pago.cs" />
     <Compile Include="Models\Servicio.cs" />
     <Compile Include="Models\Sesion.cs" />
+    <Compile Include="Models\SolicitudCompraCasaManager.cs" />
     <Compile Include="Models\Solicitud_Compra_Casa.cs" />
+    <Compile Include="Models\SolTarjetaCreditoManager.cs" />
     <Compile Include="Models\Sol_Tarjeta_Credito.cs" />
     <Compile Include="Models\Transferencia.cs" />
     <Compile Include="Models\Traslado_Pensiones.cs" />
@@ -384,6 +386,20 @@
     </Compile>
     <Compile Include="Views\frmServicio.aspx.designer.cs">
       <DependentUpon>frmServicio.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmSolicitudCompraCasa.aspx.cs">
+      <DependentUpon>frmSolicitudCompraCasa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmSolicitudCompraCasa.aspx.designer.cs">
+      <DependentUpon>frmSolicitudCompraCasa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmSolTarjetaCredito.aspx.cs">
+      <DependentUpon>frmSolTarjetaCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmSolTarjetaCredito.aspx.designer.cs">
+      <DependentUpon>frmSolTarjetaCredito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmTransferencia.aspx.cs">
       <DependentUpon>frmTransferencia.aspx</DependentUpon>
