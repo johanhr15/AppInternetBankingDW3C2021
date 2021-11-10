@@ -23,23 +23,23 @@
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Estadistica_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Pago_Servicio1" ManuallyRouted="false" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Sesion_Usuario" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Ahorro" Width="1.5" PointX="5.25" PointY="11.625" />
         <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Certificado_Deposito" Width="1.5" PointX="8.25" PointY="10.875" />
         <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Compra_Casa" Width="1.5" PointX="8" PointY="6.5" />
         <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Credito" Width="1.5" PointX="3" PointY="22" />
-        <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Inversion" Width="1.5" PointX="5.25" PointY="14.625" />
         <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Marchamo" Width="1.5" PointX="8.375" PointY="0.75" />
         <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Sol_Tarjeta_Credito" Width="1.5" PointX="3" PointY="25.5" />
         <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Traslado_Pensiones" Width="1.5" PointX="3" PointY="18.875" />
-        <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Certificado_Deposito_Cuenta" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Certificado_Deposito_Usuario" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Compra_Casa_Moneda" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Compra_Casa_Usuario" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Credito_Usuario" />
-        <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Sol_Tarjeta_Credito_Usuario" />
         <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Traslado_Pensiones_Usuario" />
+        <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Ahorro" Width="1.5" PointX="5.25" PointY="11.5" />
+        <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta1" />
+        <EntityTypeShape EntityType="INTERNET_BANKING_DW1_3C2021Model.Inversion" Width="1.5" PointX="5.25" PointY="14.375" />
+        <AssociationConnector Association="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

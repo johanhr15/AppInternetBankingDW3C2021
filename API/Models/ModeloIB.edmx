@@ -12,7 +12,7 @@
           <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CuentaOrigen" Type="int" Nullable="false" />
           <Property Name="Monto" Type="int" Nullable="false" />
-          <Property Name="Plazo" Type="varbinary" MaxLength="50" Nullable="false" />
+          <Property Name="Plazo" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TipoAhorro" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Certificado_Deposito">
@@ -99,7 +99,7 @@
           </Key>
           <Property Name="Codigo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CuentaOrigen" Type="int" Nullable="false" />
-          <Property Name="FondosInversion" Type="int" Nullable="false" />
+          <Property Name="FondosInversion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Plazo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CodigoMoneda" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
@@ -495,9 +495,9 @@
           <NavigationProperty Name="Usuario" Relationship="Self.FK_Cuenta_Usuario" FromRole="Cuenta" ToRole="Usuario" />
           <NavigationProperty Name="Pago" Relationship="Self.FK_Pago_Cuenta" FromRole="Cuenta" ToRole="Pago" />
           <NavigationProperty Name="Transferencia" Relationship="Self.FK_Transferencia_Cuenta" FromRole="Cuenta" ToRole="Transferencia" />
-          <NavigationProperty Name="Ahorro" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta" FromRole="Cuenta" ToRole="Ahorro" />
           <NavigationProperty Name="Certificado_Deposito" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Certificado_Deposito_Cuenta" FromRole="Cuenta" ToRole="Certificado_Deposito" />
-          <NavigationProperty Name="Inversion" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta" FromRole="Cuenta" ToRole="Inversion" />
+          <NavigationProperty Name="Ahorro" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta1" FromRole="Cuenta" ToRole="Ahorro" />
+          <NavigationProperty Name="Inversion" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta1" FromRole="Cuenta" ToRole="Inversion" />
         </EntityType>
         <EntityType Name="Error">
           <Key>
@@ -752,18 +752,12 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Sesion" EntitySet="Sesion" />
           </AssociationSet>
-          <EntitySet Name="Ahorro" EntityType="INTERNET_BANKING_DW1_3C2021Model.Ahorro" />
           <EntitySet Name="Certificado_Deposito" EntityType="INTERNET_BANKING_DW1_3C2021Model.Certificado_Deposito" />
           <EntitySet Name="Compra_Casa" EntityType="INTERNET_BANKING_DW1_3C2021Model.Compra_Casa" />
           <EntitySet Name="Credito" EntityType="INTERNET_BANKING_DW1_3C2021Model.Credito" />
-          <EntitySet Name="Inversion" EntityType="INTERNET_BANKING_DW1_3C2021Model.Inversion" />
           <EntitySet Name="Marchamo" EntityType="INTERNET_BANKING_DW1_3C2021Model.Marchamo" />
           <EntitySet Name="Sol_Tarjeta_Credito" EntityType="INTERNET_BANKING_DW1_3C2021Model.Sol_Tarjeta_Credito" />
           <EntitySet Name="Traslado_Pensiones" EntityType="INTERNET_BANKING_DW1_3C2021Model.Traslado_Pensiones" />
-          <AssociationSet Name="FK_Ahorro_Cuenta" Association="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Ahorro" EntitySet="Ahorro" />
-          </AssociationSet>
           <AssociationSet Name="FK_Certificado_Deposito_Cuenta" Association="INTERNET_BANKING_DW1_3C2021Model.FK_Certificado_Deposito_Cuenta">
             <End Role="Cuenta" EntitySet="Cuenta" />
             <End Role="Certificado_Deposito" EntitySet="Certificado_Deposito" />
@@ -784,10 +778,6 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Credito" EntitySet="Credito" />
           </AssociationSet>
-          <AssociationSet Name="FK_Inversion_Cuenta" Association="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta">
-            <End Role="Cuenta" EntitySet="Cuenta" />
-            <End Role="Inversion" EntitySet="Inversion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Sol_Tarjeta_Credito_Usuario" Association="INTERNET_BANKING_DW1_3C2021Model.FK_Sol_Tarjeta_Credito_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Sol_Tarjeta_Credito" EntitySet="Sol_Tarjeta_Credito" />
@@ -796,18 +786,17 @@
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Traslado_Pensiones" EntitySet="Traslado_Pensiones" />
           </AssociationSet>
+          <EntitySet Name="Ahorro" EntityType="INTERNET_BANKING_DW1_3C2021Model.Ahorro" />
+          <AssociationSet Name="FK_Ahorro_Cuenta1" Association="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta1">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Ahorro" EntitySet="Ahorro" />
+          </AssociationSet>
+          <EntitySet Name="Inversion" EntityType="INTERNET_BANKING_DW1_3C2021Model.Inversion" />
+          <AssociationSet Name="FK_Inversion_Cuenta1" Association="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta1">
+            <End Role="Cuenta" EntitySet="Cuenta" />
+            <End Role="Inversion" EntitySet="Inversion" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="Ahorro">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CuentaOrigen" Type="Int32" Nullable="false" />
-          <Property Name="Monto" Type="Int32" Nullable="false" />
-          <Property Name="Plazo" Type="Binary" Nullable="false" MaxLength="50" FixedLength="false" />
-          <Property Name="TipoAhorro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Cuenta" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta" FromRole="Ahorro" ToRole="Cuenta" />
-        </EntityType>
         <EntityType Name="Certificado_Deposito">
           <Key>
             <PropertyRef Name="Codigo" />
@@ -854,18 +843,6 @@
           <Property Name="CRE_INGRESOS" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <NavigationProperty Name="Usuario" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Credito_Usuario" FromRole="Credito" ToRole="Usuario" />
         </EntityType>
-        <EntityType Name="Inversion">
-          <Key>
-            <PropertyRef Name="Codigo" />
-          </Key>
-          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CuentaOrigen" Type="Int32" Nullable="false" />
-          <Property Name="FondosInversion" Type="Int32" Nullable="false" />
-          <Property Name="Plazo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CodigoMoneda" Type="Int32" Nullable="false" />
-          <Property Name="Cantidad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cuenta" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta" FromRole="Inversion" ToRole="Cuenta" />
-        </EntityType>
         <EntityType Name="Marchamo">
           <Key>
             <PropertyRef Name="idMarchamo" />
@@ -909,18 +886,6 @@
           <Property Name="TRAS_FCL_DESTINO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Usuario" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Traslado_Pensiones_Usuario" FromRole="Traslado_Pensiones" ToRole="Usuario" />
         </EntityType>
-        <Association Name="FK_Ahorro_Cuenta">
-          <End Type="INTERNET_BANKING_DW1_3C2021Model.Cuenta" Role="Cuenta" Multiplicity="1" />
-          <End Type="INTERNET_BANKING_DW1_3C2021Model.Ahorro" Role="Ahorro" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Ahorro">
-              <PropertyRef Name="CuentaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Certificado_Deposito_Cuenta">
           <End Type="INTERNET_BANKING_DW1_3C2021Model.Cuenta" Role="Cuenta" Multiplicity="1" />
           <End Type="INTERNET_BANKING_DW1_3C2021Model.Certificado_Deposito" Role="Certificado_Deposito" Multiplicity="*" />
@@ -981,18 +946,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Inversion_Cuenta">
-          <End Type="INTERNET_BANKING_DW1_3C2021Model.Cuenta" Role="Cuenta" Multiplicity="1" />
-          <End Type="INTERNET_BANKING_DW1_3C2021Model.Inversion" Role="Inversion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cuenta">
-              <PropertyRef Name="Codigo" />
-            </Principal>
-            <Dependent Role="Inversion">
-              <PropertyRef Name="CuentaOrigen" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Sol_Tarjeta_Credito_Usuario">
           <End Type="INTERNET_BANKING_DW1_3C2021Model.Usuario" Role="Usuario" Multiplicity="1" />
           <End Type="INTERNET_BANKING_DW1_3C2021Model.Sol_Tarjeta_Credito" Role="Sol_Tarjeta_Credito" Multiplicity="*" />
@@ -1014,6 +967,53 @@
             </Principal>
             <Dependent Role="Traslado_Pensiones">
               <PropertyRef Name="TRAS_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Ahorro">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CuentaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="Monto" Type="Int32" Nullable="false" />
+          <Property Name="Plazo" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TipoAhorro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cuenta" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Ahorro_Cuenta1" FromRole="Ahorro" ToRole="Cuenta" />
+        </EntityType>
+        <Association Name="FK_Ahorro_Cuenta1">
+          <End Type="INTERNET_BANKING_DW1_3C2021Model.Cuenta" Role="Cuenta" Multiplicity="1" />
+          <End Type="INTERNET_BANKING_DW1_3C2021Model.Ahorro" Role="Ahorro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Ahorro">
+              <PropertyRef Name="CuentaOrigen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Inversion">
+          <Key>
+            <PropertyRef Name="Codigo" />
+          </Key>
+          <Property Name="Codigo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CuentaOrigen" Type="Int32" Nullable="false" />
+          <Property Name="FondosInversion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Plazo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoMoneda" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cuenta" Relationship="INTERNET_BANKING_DW1_3C2021Model.FK_Inversion_Cuenta1" FromRole="Inversion" ToRole="Cuenta" />
+        </EntityType>
+        <Association Name="FK_Inversion_Cuenta1">
+          <End Type="INTERNET_BANKING_DW1_3C2021Model.Cuenta" Role="Cuenta" Multiplicity="1" />
+          <End Type="INTERNET_BANKING_DW1_3C2021Model.Inversion" Role="Inversion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cuenta">
+              <PropertyRef Name="Codigo" />
+            </Principal>
+            <Dependent Role="Inversion">
+              <PropertyRef Name="CuentaOrigen" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1141,17 +1141,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Ahorro">
-            <EntityTypeMapping TypeName="INTERNET_BANKING_DW1_3C2021Model.Ahorro">
-              <MappingFragment StoreEntitySet="Ahorro">
-                <ScalarProperty Name="TipoAhorro" ColumnName="TipoAhorro" />
-                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
-                <ScalarProperty Name="Monto" ColumnName="Monto" />
-                <ScalarProperty Name="CuentaOrigen" ColumnName="CuentaOrigen" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Certificado_Deposito">
             <EntityTypeMapping TypeName="INTERNET_BANKING_DW1_3C2021Model.Certificado_Deposito">
               <MappingFragment StoreEntitySet="Certificado_Deposito">
@@ -1196,18 +1185,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Inversion">
-            <EntityTypeMapping TypeName="INTERNET_BANKING_DW1_3C2021Model.Inversion">
-              <MappingFragment StoreEntitySet="Inversion">
-                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-                <ScalarProperty Name="CodigoMoneda" ColumnName="CodigoMoneda" />
-                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
-                <ScalarProperty Name="FondosInversion" ColumnName="FondosInversion" />
-                <ScalarProperty Name="CuentaOrigen" ColumnName="CuentaOrigen" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Marchamo">
             <EntityTypeMapping TypeName="INTERNET_BANKING_DW1_3C2021Model.Marchamo">
               <MappingFragment StoreEntitySet="Marchamo">
@@ -1249,6 +1226,29 @@
                 <ScalarProperty Name="TRAS_CLIENTE_CORREO" ColumnName="TRAS_CLIENTE_CORREO" />
                 <ScalarProperty Name="TRAS_CLIENTE" ColumnName="TRAS_CLIENTE" />
                 <ScalarProperty Name="TRAS_CODIGO" ColumnName="TRAS_CODIGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ahorro">
+            <EntityTypeMapping TypeName="INTERNET_BANKING_DW1_3C2021Model.Ahorro">
+              <MappingFragment StoreEntitySet="Ahorro">
+                <ScalarProperty Name="TipoAhorro" ColumnName="TipoAhorro" />
+                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+                <ScalarProperty Name="Monto" ColumnName="Monto" />
+                <ScalarProperty Name="CuentaOrigen" ColumnName="CuentaOrigen" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inversion">
+            <EntityTypeMapping TypeName="INTERNET_BANKING_DW1_3C2021Model.Inversion">
+              <MappingFragment StoreEntitySet="Inversion">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="CodigoMoneda" ColumnName="CodigoMoneda" />
+                <ScalarProperty Name="Plazo" ColumnName="Plazo" />
+                <ScalarProperty Name="FondosInversion" ColumnName="FondosInversion" />
+                <ScalarProperty Name="CuentaOrigen" ColumnName="CuentaOrigen" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -16,7 +16,7 @@ namespace API.Models
     {
         public int Codigo { get; set; }
         public int CuentaOrigen { get; set; }
-        public int FondosInversion { get; set; }
+        public string FondosInversion { get; set; }
         public string Plazo { get; set; }
         public int CodigoMoneda { get; set; }
         public int Cantidad { get; set; }

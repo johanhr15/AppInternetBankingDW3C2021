@@ -17,7 +17,7 @@ namespace API.Models
         public int Codigo { get; set; }
         public int CuentaOrigen { get; set; }
         public int Monto { get; set; }
-        public byte[] Plazo { get; set; }
+        public decimal Plazo { get; set; }
         public string TipoAhorro { get; set; }
     
         public virtual Cuenta Cuenta { get; set; }
