@@ -12,7 +12,7 @@ namespace AppWebInternetBanking.Controllers
 {
     public class InversionManager
     {
-        string Url = "http://localhost:49220/api/hotel/";
+        string Url = "http://localhost:49220/api/Inversion/";
 
 
         HttpClient GetClient(string token)
@@ -25,7 +25,7 @@ namespace AppWebInternetBanking.Controllers
             return httpClient;
         }
 
-        public async Task<IEnumerable<Inversion>> ObtenerInversion(string token)
+        public async Task<IEnumerable<Inversion>> ObtenerInversiones(string token)
         {
             HttpClient httpClient = GetClient(token);
 
@@ -34,7 +34,7 @@ namespace AppWebInternetBanking.Controllers
             return JsonConvert.DeserializeObject<IEnumerable<Inversion>>(resultado);
         }
 
-        public async Task<Inversion> ObtenerInversiones(string token, string codigo)
+        public async Task<Inversion> ObtenerInversion(string token, string codigo)
         {
             HttpClient httpClient = GetClient(token);
 

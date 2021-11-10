@@ -15,6 +15,11 @@ namespace AppWebInternetBanking.Views
     {
         IEnumerable<CertificadoDeposito> certificados = new ObservableCollection<CertificadoDeposito>();
         CertificadoDepositoManager certificadoManager = new CertificadoDepositoManager();
+        IEnumerable<Usuario> usuarios = new ObservableCollection<Usuario>();
+        UsuarioManager usuarioManager = new UsuarioManager();
+        IEnumerable<Moneda> monedas = new ObservableCollection<Moneda>();
+        MonedaManager monedaManager = new MonedaManager();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -52,6 +57,36 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Text = "Hubo un error al cargar la lista de servicios.";
                 lblStatus.Visible = true;
             }
+
+            try
+            {
+                usuarios = await usuarioManager.ObtenerUsuarios(Session["Token"].ToString());
+                ddlCodigoUsuario.DataSource = usuarios.ToList();
+                ddlCodigoUsuario.DataBind();
+                ddlCodigoUsuario.DataTextField = "Nombre";
+                ddlCodigoUsuario.DataValueField = "Codigo";
+                ddlCodigoUsuario.DataBind();
+            }
+            catch (Exception exc)
+            {
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
+                lblStatus.Visible = true;
+            }
+
+            try
+            {
+                monedas = await monedaManager.ObtenerMonedas(Session["Token"].ToString());
+                ddlCodigoMoneda.DataSource = monedas.ToList();
+                ddlCodigoMoneda.DataBind();
+                ddlCodigoMoneda.DataTextField = "Descripcion";
+                ddlCodigoMoneda.DataValueField = "Codigo";
+                ddlCodigoMoneda.DataBind();
+            }
+            catch (Exception exc)
+            {
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
+                lblStatus.Visible = true;
+            }
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -61,11 +96,9 @@ namespace AppWebInternetBanking.Views
             btnAceptarMant.Visible = true;
             ltrCodigoMant.Visible = true;
             txtCodigoMant.Visible = true;
-            txtCodigoUsuario.Visible = true;
             ltrCodigoUsuario.Visible = true;
             txtCodigoCuenta.Visible = true;
             ltrCodigoCuenta.Visible = true;
-            txtCodigoMoneda.Visible = true;
             ltrCodigoMoneda.Visible = true;
             txtMonto.Visible = true;
             ltrMonto.Visible = true;
@@ -91,9 +124,9 @@ namespace AppWebInternetBanking.Views
                     ltrTituloMantenimiento.Text = "Modificar Certificado";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
-                    txtCodigoUsuario.Text = row.Cells[1].Text.Trim();
+                    ddlCodigoUsuario.SelectedValue = row.Cells[1].Text.Trim();
                     txtCodigoCuenta.Text = row.Cells[2].Text.Trim();
-                    txtCodigoMoneda.Text = row.Cells[3].Text.Trim();
+                    ddlCodigoMoneda.SelectedValue = row.Cells[3].Text.Trim();
                     txtMonto.Text = row.Cells[4].Text.Trim();
                     txtInteres.Text = row.Cells[5].Text.Trim();
                     txtFechaInicio.Text = row.Cells[6].Text.Trim();
@@ -115,68 +148,98 @@ namespace AppWebInternetBanking.Views
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodigoMant.Text))//Insertar
+            try
             {
-                CertificadoDeposito certificado = new CertificadoDeposito()
+                if (string.IsNullOrEmpty(txtCodigoMant.Text))//Insertar
                 {
-                    CodigoUsuario = Convert.ToInt32(txtCodigoUsuario.Text),
-                    CodigoCuenta = Convert.ToInt32(txtCodigoCuenta.Text),
-                    CodigoMoneda = Convert.ToInt32(txtCodigoMoneda.Text),
-                    Monto = Convert.ToDecimal(txtMonto.Text),
-                    Interes = txtInteres.Text,
-                    FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
-                    FechaFin = Convert.ToDateTime(txtFechaFin.Text)
-                };
+                    if (Convert.ToDateTime(txtFechaInicio.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFechaInicio.Text) && Convert.ToDateTime(txtFechaFin.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFechaFin.Text))
+                    {
+                        CertificadoDeposito certificado = new CertificadoDeposito()
+                        {
+                            CodigoUsuario = Convert.ToInt32(ddlCodigoUsuario.SelectedValue),
+                            CodigoCuenta = Convert.ToInt32(txtCodigoCuenta.Text),
+                            CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
+                            Monto = Convert.ToDecimal(txtMonto.Text),
+                            Interes = txtInteres.Text,
+                            FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
+                            FechaFin = Convert.ToDateTime(txtFechaFin.Text)
+                        };
 
-                CertificadoDeposito certificadoIngresado = await certificadoManager.Ingresar(certificado, Session["Token"].ToString());
+                        CertificadoDeposito certificadoIngresado = await certificadoManager.Ingresar(certificado, Session["Token"].ToString());
 
-                if (!string.IsNullOrEmpty(certificadoIngresado.Interes))
-                {
-                    lblResultado.Text = "Servicio ingresado con exito";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Green;
-                    btnAceptarMant.Visible = false;
-                    InicializarControles();
-                    //Correo correo = new Correo();
-                    //correo.Enviar("Nuevo servicio incluido", certificado.Descripcion, "svillagra07@gmail.com");
+                        if (!string.IsNullOrEmpty(certificadoIngresado.Interes))
+                        {
+                            lblResultado.Text = "Servicio ingresado con exito";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Green;
+                            btnAceptarMant.Visible = false;
+                            InicializarControles();
+                            //Correo correo = new Correo();
+                            //correo.Enviar("Nuevo servicio incluido", certificado.Descripcion, "svillagra07@gmail.com");
+                        }
+                        else
+                        {
+                            lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Maroon;
+                        }
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
+                    }
+
+
+
                 }
-                else
+                else //Modificar
                 {
-                    lblResultado.Text = "Hubo un error al efectuar la operacion.";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Maroon;
+                    if (Convert.ToDateTime(txtFechaInicio.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFechaInicio.Text) && Convert.ToDateTime(txtFechaFin.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFechaFin.Text))
+                    {
+                        CertificadoDeposito certificado = new CertificadoDeposito()
+                        {
+                            Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                            CodigoUsuario = Convert.ToInt32(ddlCodigoUsuario.SelectedValue),
+                            CodigoCuenta = Convert.ToInt32(txtCodigoCuenta.Text),
+                            CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
+                            Monto = Convert.ToDecimal(txtMonto.Text),
+                            Interes = txtInteres.Text,
+                            FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
+                            FechaFin = Convert.ToDateTime(txtFechaFin.Text)
+                        };
+
+                        CertificadoDeposito certificadoModificado = await certificadoManager.Actualizar(certificado, Session["Token"].ToString());
+
+                        if (!string.IsNullOrEmpty(certificadoModificado.Interes))
+                        {
+                            lblResultado.Text = "Servicio actualizado con exito";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Green;
+                            btnAceptarMant.Visible = false;
+                            InicializarControles();
+                        }
+                        else
+                        {
+                            lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Maroon;
+                        }
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
+                    }
                 }
             }
-            else //Modificar
+            catch 
             {
-                CertificadoDeposito certificado = new CertificadoDeposito()
-                {
-                    Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                    CodigoUsuario = Convert.ToInt32(txtCodigoUsuario.Text),
-                    CodigoCuenta = Convert.ToInt32(txtCodigoCuenta.Text),
-                    CodigoMoneda = Convert.ToInt32(txtCodigoMoneda.Text),
-                    Monto = Convert.ToDecimal(txtMonto.Text),
-                    Interes = txtInteres.Text,
-                    FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
-                    FechaFin = Convert.ToDateTime(txtFechaFin.Text)
-                };
-
-                CertificadoDeposito certificadoModificado = await certificadoManager.Actualizar(certificado, Session["Token"].ToString());
-
-                if (!string.IsNullOrEmpty(certificadoModificado.Interes))
-                {
-                    lblResultado.Text = "Servicio actualizado con exito";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Green;
-                    btnAceptarMant.Visible = false;
-                    InicializarControles();
-                }
-                else
-                {
-                    lblResultado.Text = "Hubo un error al efectuar la operacion.";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Maroon;
-                }
+                lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                lblResultado.Visible = true;
+                lblResultado.ForeColor = Color.Maroon;
             }
         }
 

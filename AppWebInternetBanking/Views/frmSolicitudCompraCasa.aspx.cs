@@ -15,6 +15,11 @@ namespace AppWebInternetBanking.Views
     {
         IEnumerable<Solicitud_Compra_Casa> solicitud = new ObservableCollection<Solicitud_Compra_Casa>();
         SolicitudCompraCasaManager SolicitudManager = new SolicitudCompraCasaManager();
+        IEnumerable<Usuario> usuarios = new ObservableCollection<Usuario>();
+        UsuarioManager usuarioManager = new UsuarioManager();
+        IEnumerable<Moneda> monedas = new ObservableCollection<Moneda>();
+        MonedaManager monedaManager = new MonedaManager();
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -53,6 +58,36 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Text = "Hubo un error al cargar la lista de servicios.";
                 lblStatus.Visible = true;
             }
+
+            try
+            {
+                usuarios = await usuarioManager.ObtenerUsuarios(Session["Token"].ToString());
+                ddlCodigoUsuario.DataSource = usuarios.ToList();
+                ddlCodigoUsuario.DataBind();
+                ddlCodigoUsuario.DataTextField = "Nombre";
+                ddlCodigoUsuario.DataValueField = "Codigo";
+                ddlCodigoUsuario.DataBind();
+            }
+            catch (Exception exc)
+            {
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
+                lblStatus.Visible = true;
+            }
+
+            try
+            {
+                monedas = await monedaManager.ObtenerMonedas(Session["Token"].ToString());
+                ddlCodigoMoneda.DataSource = monedas.ToList();
+                ddlCodigoMoneda.DataBind();
+                ddlCodigoMoneda.DataTextField = "Descripcion";
+                ddlCodigoMoneda.DataValueField = "Codigo";
+                ddlCodigoMoneda.DataBind();
+            }
+            catch (Exception exc)
+            {
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
+                lblStatus.Visible = true;
+            }
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -62,9 +97,7 @@ namespace AppWebInternetBanking.Views
             btnAceptarMant.Visible = true;
             ltrCodigoMant.Visible = true;
             txtCodigoMant.Visible = true;
-            txtCodigoUsuario.Visible = true;
             ltrCodigoUsuario.Visible = true;
-            txtCodigoMoneda.Visible = true;
             ltrCodigoMoneda.Visible = true;
             txtTipoCasa.Visible = true;
             ltrTipoCasa.Visible = true;
@@ -95,8 +128,8 @@ namespace AppWebInternetBanking.Views
                     ltrTituloMantenimiento.Text = "Modificar solicitud";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
-                    txtCodigoUsuario.Text = row.Cells[1].Text;
-                    txtCodigoMoneda.Text = row.Cells[2].Text;
+                    ddlCodigoUsuario.SelectedValue = row.Cells[1].Text;
+                    ddlCodigoMoneda.SelectedValue = row.Cells[2].Text;
                     txtTipoCasa.Text = row.Cells[3].Text;
                     txtTasaInteres.Text = row.Cells[4].Text;
                     txtValorCasa.Text = row.Cells[5].Text;
@@ -120,73 +153,103 @@ namespace AppWebInternetBanking.Views
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtCodigoMant.Text))//Insertar
+            try
             {
-                Solicitud_Compra_Casa solicitud = new Solicitud_Compra_Casa()
+                if (string.IsNullOrEmpty(txtCodigoMant.Text))//Insertar
                 {
-                    CodigoUsuario = Convert.ToInt32(txtCodigoUsuario.Text),
-                    CodigoMoneda = Convert.ToInt32(txtCodigoMoneda.Text),
-                    TipoCasa = txtTipoCasa.Text,
-                    TasaInteres = Convert.ToInt32(txtTasaInteres.Text),
-                    ValorCasa = Convert.ToInt32(txtValorCasa.Text),
-                    Prima = Convert.ToInt32(txtPrima.Text),
-                    PlazoMeses = Convert.ToInt32(txtPlazoMeses.Text),
-                    FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
-                    Estado = ddlEstado.SelectedValue
-                };
+                    if (Convert.ToDateTime(txtFechaInicio.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFechaInicio.Text))
+                    {
+                        Solicitud_Compra_Casa solicitud = new Solicitud_Compra_Casa()
+                        {
+                            CodigoUsuario = Convert.ToInt32(ddlCodigoUsuario.SelectedValue),
+                            CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
+                            TipoCasa = txtTipoCasa.Text,
+                            TasaInteres = Convert.ToInt32(txtTasaInteres.Text),
+                            ValorCasa = Convert.ToInt32(txtValorCasa.Text),
+                            Prima = Convert.ToInt32(txtPrima.Text),
+                            PlazoMeses = Convert.ToInt32(txtPlazoMeses.Text),
+                            FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
+                            Estado = ddlEstado.SelectedValue
+                        };
 
-                Solicitud_Compra_Casa solicitudIngresada = await SolicitudManager.Ingresar(solicitud, Session["Token"].ToString());
+                        Solicitud_Compra_Casa solicitudIngresada = await SolicitudManager.Ingresar(solicitud, Session["Token"].ToString());
 
-                if (!string.IsNullOrEmpty(solicitudIngresada.TipoCasa))
-                {
-                    lblResultado.Text = "Solicitud ingresada con exito";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Green;
-                    btnAceptarMant.Visible = false;
-                    InicializarControles();
-                    //Correo correo = new Correo();
-                    //correo.Enviar("Nuevo servicio incluido", certificado.Descripcion, "svillagra07@gmail.com");
+                        if (!string.IsNullOrEmpty(solicitudIngresada.TipoCasa))
+                        {
+                            lblResultado.Text = "Solicitud ingresada con exito";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Green;
+                            btnAceptarMant.Visible = false;
+                            InicializarControles();
+                            //Correo correo = new Correo();
+                            //correo.Enviar("Nuevo servicio incluido", certificado.Descripcion, "svillagra07@gmail.com");
+                        }
+                        else
+                        {
+                            lblResultado.Text = "Hubo un error al ingresar la solicitud.";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Maroon;
+                        }
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al ingresar la solicitud.";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
+                    }
+
                 }
-                else
+                else //Modificar
                 {
-                    lblResultado.Text = "Hubo un error al ingresar la solicitud.";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Maroon;
+                    if (Convert.ToDateTime(txtFechaInicio.Text) >= DateTime.Now && !string.IsNullOrEmpty(txtFechaInicio.Text))
+                    {
+                        Solicitud_Compra_Casa solicitud = new Solicitud_Compra_Casa()
+                        {
+                            Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                            CodigoUsuario = Convert.ToInt32(ddlCodigoUsuario.SelectedValue),
+                            CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
+                            TipoCasa = txtTipoCasa.Text,
+                            TasaInteres = Convert.ToInt32(txtTasaInteres.Text),
+                            ValorCasa = Convert.ToInt32(txtValorCasa.Text),
+                            Prima = Convert.ToInt32(txtPrima.Text),
+                            PlazoMeses = Convert.ToInt32(txtPlazoMeses.Text),
+                            FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
+                            Estado = ddlEstado.SelectedValue
+                        };
+
+                        Solicitud_Compra_Casa solicitudModificada = await SolicitudManager.Actualizar(solicitud, Session["Token"].ToString());
+
+                        if (!string.IsNullOrEmpty(solicitudModificada.TipoCasa))
+                        {
+                            lblResultado.Text = "Solicitud actualizada con exito";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Green;
+                            btnAceptarMant.Visible = false;
+                            InicializarControles();
+                        }
+                        else
+                        {
+                            lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Maroon;
+                        }
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
+                    }
+
                 }
             }
-            else //Modificar
+            catch
             {
-                Solicitud_Compra_Casa solicitud = new Solicitud_Compra_Casa()
-                {
-                    Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                    CodigoUsuario = Convert.ToInt32(txtCodigoUsuario.Text),
-                    CodigoMoneda = Convert.ToInt32(txtCodigoMoneda.Text),
-                    TipoCasa = txtTipoCasa.Text,
-                    TasaInteres = Convert.ToInt32(txtTasaInteres.Text),
-                    ValorCasa = Convert.ToInt32(txtValorCasa.Text),
-                    Prima = Convert.ToInt32(txtPrima.Text),
-                    PlazoMeses = Convert.ToInt32(txtPlazoMeses.Text),
-                    FechaInicio = Convert.ToDateTime(txtFechaInicio.Text),
-                    Estado = ddlEstado.SelectedValue
-                };
-
-                Solicitud_Compra_Casa solicitudModificada = await SolicitudManager.Actualizar(solicitud, Session["Token"].ToString());
-
-                if (!string.IsNullOrEmpty(solicitudModificada.TipoCasa))
-                {
-                    lblResultado.Text = "Solicitud actualizada con exito";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Green;
-                    btnAceptarMant.Visible = false;
-                    InicializarControles();
-                }
-                else
-                {
-                    lblResultado.Text = "Hubo un error al efectuar la operacion.";
-                    lblResultado.Visible = true;
-                    lblResultado.ForeColor = Color.Maroon;
-                }
+                lblResultado.Text = "Hubo un error al efectuar la operacion.";
+                lblResultado.Visible = true;
+                lblResultado.ForeColor = Color.Maroon;
             }
+            
         }
 
         protected void btnCancelarMant_Click(object sender, EventArgs e)

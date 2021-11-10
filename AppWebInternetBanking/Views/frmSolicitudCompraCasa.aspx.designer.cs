@@ -114,13 +114,13 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.Literal ltrCodigoUsuario;
 
         /// <summary>
-        /// txtCodigoUsuario control.
+        /// ddlCodigoUsuario control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoUsuario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCodigoUsuario;
 
         /// <summary>
         /// ltrCodigoMoneda control.
@@ -132,13 +132,13 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.Literal ltrCodigoMoneda;
 
         /// <summary>
-        /// txtCodigoMoneda control.
+        /// ddlCodigoMoneda control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoMoneda;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCodigoMoneda;
 
         /// <summary>
         /// ltrTipoCasa control.

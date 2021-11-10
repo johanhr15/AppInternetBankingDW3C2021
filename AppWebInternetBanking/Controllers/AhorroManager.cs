@@ -12,7 +12,7 @@ namespace AppWebInternetBanking.Controllers
 {
     public class AhorroManager
     {
-        string Url = "http://localhost:49220/api/hotel/";
+        string Url = "http://localhost:49220/api/Ahorro/";
 
 
         HttpClient GetClient(string token)

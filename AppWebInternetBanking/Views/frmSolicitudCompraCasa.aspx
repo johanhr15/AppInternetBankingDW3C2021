@@ -84,12 +84,14 @@
                   <td><asp:TextBox ID="txtCodigoMant" runat="server" TextMode="Number" Enabled="false" CssClass="form-control" /></td>
               </tr>
               <tr>
-                  <td><asp:Literal ID="ltrCodigoUsuario" Text="Codigo Usuario" runat="server" /></td>
-                  <td><asp:TextBox ID="txtCodigoUsuario" runat="server"  TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:Literal ID="ltrCodigoUsuario" Text="Cliente" runat="server" /></td>
+                  <td><asp:DropDownList ID="ddlCodigoUsuario" CssClass="form-control" runat="server"> 
+                  </asp:DropDownList></td>
               </tr>
               <tr>
-                  <td><asp:Literal ID="ltrCodigoMoneda" Text="Codigo Moneda" runat="server" /></td>
-                  <td><asp:TextBox ID="txtCodigoMoneda" runat="server"  TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:Literal ID="ltrCodigoMoneda" Text="Moneda" runat="server" /></td>
+                  <td><asp:DropDownList ID="ddlCodigoMoneda" CssClass="form-control" runat="server"> 
+                  </asp:DropDownList></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrTipoCasa" Text="Tipo Casa" runat="server" /></td>
@@ -113,7 +115,7 @@
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrFechaInicio" Text="Fecha Inicio" runat="server" /></td>
-                  <td><asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control" /></td>
+                  <td><asp:TextBox ID="txtFechaInicio" TextMode="DateTimeLocal" runat="server" CssClass="form-control" /></td>
               </tr>
               <tr>
                   <td><asp:Literal Text="Estado" runat="server" /></td>

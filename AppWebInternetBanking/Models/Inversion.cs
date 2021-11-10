@@ -7,11 +7,11 @@ namespace AppWebInternetBanking.Models
 {
     public class Inversion
     {
-        public int INV_CODIGO { get; set; }
-        public int INV_CUENTAORIGEN { get; set; }
-        public string INV_FONDOSINV { get; set; }
-        public string INV_PLAZO { get; set; }
-        public string INV_MONEDA { get; set; }
-        public int INV_MONTO { get; set; }
+        public int Codigo { get; set; }
+        public int CuentaOrigen { get; set; }
+        public int FondosInversion { get; set; }
+        public string Plazo { get; set; }
+        public int CodigoMoneda { get; set; }
+        public int Cantidad { get; set; }
     }
 }

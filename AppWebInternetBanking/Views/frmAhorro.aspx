@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmAhorro.aspx.cs" Inherits="AppWebInternetBanking.Views.frmAhorro" %>
+﻿<%--<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmAhorro.aspx.cs" Inherits="AppWebInternetBanking.Views.frmAhorro" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
 </asp:Content>
 
@@ -129,4 +129,4 @@
     </div>
   </div>
 </div>
-</asp:Content>
+</asp:Content>--%>
