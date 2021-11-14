@@ -1,6 +1,6 @@
-﻿<%--<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmInversion.aspx.cs" Inherits="AppWebInternetBanking.Views.frmInversion" %>
+﻿<%@ Page Async ="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmInversion.aspx.cs" Inherits="AppWebInternetBanking.Views.frmInversion" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-</asp:Content>
+
 
 <script type="text/javascript">
         
@@ -28,23 +28,23 @@
     <div class="container">
     <h1>Mantenimiento de Inversion</h1>
     <input id="myInput" placeholder="Buscar" class="form-control" type="text" />
-    <asp:GridView ID="gvInversion" OnRowCommand="gvInversiones_RowCommand" runat="server" AutoGenerateColumns="false"
+    <asp:GridView ID="gvInversion" OnRowCommand="gvInversion_RowCommand" runat="server" AutoGenerateColumns="false"
       CssClass="table table-stripped" AlternatingRowStyle-BackColor="LightBlue" HeaderStyle-CssClass="navy" 
         HeaderStyle-BackColor="#243054" HeaderStyle-ForeColor="White" Width="100%">
         <Columns>
-            <asp:BoundField HeaderText="Codigo" DataField="INV_CODIGO" />
-            <asp:BoundField HeaderText="CuentaOrigen" DataField="INV_CUENTAORIGEN" />
-            <asp:BoundField HeaderText="FondosInversion" DataField="INV_FONDOSINV" />
-            <asp:BoundField HeaderText="Plazo" DataField="INV_PLAZO" />
-            <asp:BoundField HeaderText="Moneda" DataField="INV_MONEDA" />
-            <asp:BoundField HeaderText="Monto" DataField="INV_MONTO" />
+            <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
+            <asp:BoundField HeaderText="CuentaOrigen" DataField="CuentaOrigen" />
+            <asp:BoundField HeaderText="FondosInversion" DataField="FondosInversion" />
+            <asp:BoundField HeaderText="Plazo" DataField="Plazo" />
+            <asp:BoundField HeaderText="Moneda" DataField="CodigoMoneda" />
+            <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" 
                 ItemStyle-HorizontalAlign="Center" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
             <asp:ButtonField HeaderText="Eliminar" CommandName="Eliminar"
                 ItemStyle-HorizontalAlign="Center" ControlStyle-CssClass="btn btn-danger" ButtonType="Button" Text="Eliminar" />
         </Columns>
     </asp:GridView>
-    <asp:LinkButton type="Button" CssClass="btn btn-success" ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" runat="server"
+    <asp:LinkButton type="Button" CssClass="btn btn-success" ID="btnNuevo" runat="server" OnClick="btnNuevo_Click" 
       Text="<span aria-hidden='true' class='glyphicon glyphicon-floppy-disk'></span> Nuevo" />
     <br />
     <asp:Label ID="lblStatus" ForeColor="Maroon" runat="server" Visible="false" />
@@ -138,4 +138,4 @@
     </div>
   </div>
 </div>
-</asp:Content>--%>
+</asp:Content>
