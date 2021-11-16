@@ -9,12 +9,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace AppWebInternetBanking.Views
 {
     public partial class frmAhorro : System.Web.UI.Page
     {
         IEnumerable<Ahorro> ahorro = new ObservableCollection<Ahorro>();
         AhorroManager ahorroManager = new AhorroManager();
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -39,6 +41,7 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Text = "Hubo un error al cargar los ahorros. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
+            
         }
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
@@ -51,7 +54,7 @@ namespace AppWebInternetBanking.Views
                     {
                         Ahorro datos = new Ahorro()
                         {
-                            CuentaOrigen = Convert.ToInt32(txtCuentaOrigenA.Text),
+                            CuentaOrigen = Convert.ToInt32(txtCuentaOrigen.Text),
                             Monto = Convert.ToInt32(txtMontoA.Text),
                             Plazo = Convert.ToDecimal(txtPlazo.Text),
                             TipoAhorro = txtTipoAhorro.Text
@@ -75,7 +78,7 @@ namespace AppWebInternetBanking.Views
                         Ahorro ahorro = new Ahorro()
                         {
                             Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                            CuentaOrigen = Convert.ToInt32(txtCuentaOrigenA.Text),
+                            CuentaOrigen = Convert.ToInt32(txtCuentaOrigen.Text),
                             Monto = Convert.ToInt32(txtMontoA.Text),
                             Plazo = Convert.ToDecimal(txtPlazo.Text),
                             TipoAhorro = txtTipoAhorro.Text
@@ -90,7 +93,10 @@ namespace AppWebInternetBanking.Views
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
-                            InicializarControles(); 
+                            InicializarControles();
+
+                            ScriptManager.RegisterStartupScript(this,
+                        this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
                         }
                     }
                 }
@@ -112,7 +118,7 @@ namespace AppWebInternetBanking.Views
                 {
                     ltrModalMensaje.Text = "Solicitud de Ahorro eliminada";
                     btnAceptarModal.Visible = false;
-                    //.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
                     InicializarControles();
                 }
             }
@@ -149,7 +155,7 @@ namespace AppWebInternetBanking.Views
                 case "Modificar":
                     ltrTituloMantenimiento.Text = "Modificar Ahorro";
                     txtCodigoMant.Text = fila.Cells[0].Text;
-                    txtCuentaOrigenA.Text = fila.Cells[1].Text;
+                    txtCuentaOrigen.Text = fila.Cells[1].Text;
                     txtMontoA.Text = fila.Cells[2].Text;
                     txtPlazo.Text = fila.Cells[3].Text;
                     txtTipoAhorro.Text = fila.Cells[4].Text;
@@ -172,7 +178,7 @@ namespace AppWebInternetBanking.Views
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             txtCodigoMant.Text = string.Empty;
-            txtCuentaOrigenA.Text = string.Empty;
+            txtCuentaOrigen.Text = string.Empty;
             txtMontoA.Text = string.Empty;
             txtPlazo.Text = string.Empty;
             txtTipoAhorro.Text = string.Empty;

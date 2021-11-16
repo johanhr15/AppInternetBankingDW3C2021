@@ -11,7 +11,7 @@ namespace AppWebInternetBanking.Controllers
 {
     public class CuentaManager
     {
-        string UrlBase = "http://localhost:49220/api/Cuentas/";
+        string UrlBase = "http://localhost:49220/api/Cuenta/";
 
         HttpClient GetClient(string token)
         {

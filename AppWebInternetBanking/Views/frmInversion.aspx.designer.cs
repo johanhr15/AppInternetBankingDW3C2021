@@ -87,15 +87,6 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.DropDownList ddlCuentaOrigen;
 
         /// <summary>
-        /// RequiredFieldValidator1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-
-        /// <summary>
         /// ltrFondosInversion control.
         /// </summary>
         /// <remarks>
@@ -150,31 +141,22 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 
         /// <summary>
-        /// ltrMoneda control.
+        /// ltrCodigoMoneda control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrMoneda;
+        protected global::System.Web.UI.WebControls.Literal ltrCodigoMoneda;
 
         /// <summary>
-        /// txtMoneda control.
+        /// ddlCodigoMoneda control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMoneda;
-
-        /// <summary>
-        /// RequiredFieldValidator2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCodigoMoneda;
 
         /// <summary>
         /// ltrMonto control.

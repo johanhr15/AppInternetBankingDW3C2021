@@ -65,12 +65,12 @@
                   <td><asp:TextBox ID="txtCodigoMant" runat="server" Enabled="false" CssClass="form-control" /></td>
               </tr>
               <tr>
-                  <td><asp:Literal ID="ltrCuentaOrigenA" Text="CuentaOrigenA" runat="server" /></td>
-                  <td><asp:TextBox ID="txtCuentaOrigenA" CssClass="form-control" runat="server"> 
+                  <td><asp:Literal ID="ltrCuentaOrigen" Text="CuentaOrigen" runat="server" /></td>
+                  <td><asp:TextBox ID="txtCuentaOrigen" CssClass="form-control" runat="server"> 
                   </asp:TextBox></td>
                   <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtCuentaOrigenA" EnableClientScript="False"></asp:RequiredFieldValidator></td>
+                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtCuentaOrigen" EnableClientScript="False"></asp:RequiredFieldValidator></td>
 
                 
               </tr>

@@ -69,22 +69,22 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.TextBox txtCodigoMant;
 
         /// <summary>
-        /// Control ltrCuentaOrigenA.
+        /// Control ltrCuentaOrigen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrCuentaOrigenA;
+        protected global::System.Web.UI.WebControls.Literal ltrCuentaOrigen;
 
         /// <summary>
-        /// Control txtCuentaOrigenA.
+        /// Control txtCuentaOrigen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCuentaOrigenA;
+        protected global::System.Web.UI.WebControls.TextBox txtCuentaOrigen;
 
         /// <summary>
         /// Control RequiredFieldValidator1.
