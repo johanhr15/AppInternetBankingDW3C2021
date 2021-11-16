@@ -162,7 +162,7 @@ namespace API.Controllers
                         SqlConnection(connectionString))
                     {
                         SqlCommand sqlCommand = new SqlCommand(@"insert into Inversion(CuentaOrigen, FondosInversion,
-                                PlazoO, CodigoMoneda, Cantidad)
+                                Plazo, CodigoMoneda, Cantidad)
                                                             values (@CuentaOrigen, @FondosInversion,
                                                             @Plazo, @CodigoMoneda, @Cantidad)",
                                                                 sqlConnection);

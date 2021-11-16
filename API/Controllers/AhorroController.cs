@@ -39,7 +39,7 @@ namespace API.Controllers
                         ahorro.Codigo = sqlDataReader.GetInt32(0);
                         ahorro.CuentaOrigen = sqlDataReader.GetInt32(1);
                         ahorro.Monto = sqlDataReader.GetInt32(2);
-                        ahorro.Plazo = sqlDataReader.GetInt32(3);
+                        ahorro.Plazo = sqlDataReader.GetDecimal(3);
                         ahorro.TipoAhorro = sqlDataReader.GetString(4);
                         
                         ahorroList.Add(ahorro);
@@ -78,7 +78,7 @@ namespace API.Controllers
                         ahorro.Codigo = sqlDataReader.GetInt32(0);
                         ahorro.CuentaOrigen = sqlDataReader.GetInt32(1);
                         ahorro.Monto = sqlDataReader.GetInt32(2);
-                        ahorro.Plazo = sqlDataReader.GetInt32(3);
+                        ahorro.Plazo = sqlDataReader.GetDecimal(3);
                         ahorro.TipoAhorro = sqlDataReader.GetString(4);
                     }
 
@@ -95,7 +95,7 @@ namespace API.Controllers
 
         
         [HttpPut]
-        public IHttpActionResult PutSolTarjetaCredito(Ahorro ahorro)
+        public IHttpActionResult PutAhorro(Ahorro ahorro)
         {
 
             if (ahorro != null)
@@ -109,10 +109,7 @@ namespace API.Controllers
                             SqlConnection(connectionString))
                         {
                             SqlCommand sqlCommand = new
-                                SqlCommand(@"update inversion set CuentaOrigen = @CuentaOrigen,
-                                                           Monto = @Monto,
-                                                           Plazo = @Plazo,
-                                                           TipoAhorro = @TipoAhorro
+                                SqlCommand(@"update ahorro set CuentaOrigen = @CuentaOrigen, Monto = @Monto, Plazo = @Plazo, TipoAhorro = @TipoAhorro
                                                            where Codigo = @Codigo",
                                                                     sqlConnection);
                             sqlCommand.Parameters.AddWithValue("@Codigo", ahorro.Codigo);
@@ -158,9 +155,7 @@ namespace API.Controllers
                         SqlConnection(connectionString))
                     {
                         SqlCommand sqlCommand = new SqlCommand(@"insert into Ahorro(CuentaOrigen, Monto,
-                                Plazo, TipoAhorro)
-                                                            values (@CuentaOrigen, @Monto,
-                                                            @Plazo, @TipoAhorro)",
+                                Plazo, TipoAhorro) values (@CuentaOrigen, @Monto, @Plazo, @TipoAhorro)",
                                                                 sqlConnection);
 
                         sqlCommand.Parameters.AddWithValue("@CuentaOrigen", ahorro.CuentaOrigen);

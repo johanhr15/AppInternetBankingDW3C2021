@@ -11,17 +11,17 @@ namespace AppWebInternetBanking.Views
 {
 
 
-    public partial class frmAhorro
+    public partial class Inversiones
     {
 
         /// <summary>
-        /// Control gvAhorro.
+        /// Control gvInversiones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvAhorro;
+        protected global::System.Web.UI.WebControls.GridView gvInversiones;
 
         /// <summary>
         /// Control btnNuevo.
@@ -69,22 +69,22 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.TextBox txtCodigoMant;
 
         /// <summary>
-        /// Control ltrCuentaOrigenA.
+        /// Control ltrCuentaOrigen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrCuentaOrigenA;
+        protected global::System.Web.UI.WebControls.Literal ltrCuentaOrigen;
 
         /// <summary>
-        /// Control txtCuentaOrigenA.
+        /// Control txtCuentaOrigen.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCuentaOrigenA;
+        protected global::System.Web.UI.WebControls.TextBox txtCuentaOrigen;
 
         /// <summary>
         /// Control RequiredFieldValidator1.
@@ -96,22 +96,22 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// Control ltrMontoA.
+        /// Control ltrFondosInversion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrMontoA;
+        protected global::System.Web.UI.WebControls.Literal ltrFondosInversion;
 
         /// <summary>
-        /// Control txtMontoA.
+        /// Control txtFondosInversion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtMontoA;
+        protected global::System.Web.UI.WebControls.TextBox txtFondosInversion;
 
         /// <summary>
         /// Control RequiredFieldValidator4.
@@ -150,22 +150,22 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
 
         /// <summary>
-        /// Control ltrTipoAhorro.
+        /// Control ltrCodigoMoneda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ltrTipoAhorro;
+        protected global::System.Web.UI.WebControls.Literal ltrCodigoMoneda;
 
         /// <summary>
-        /// Control txtTipoAhorro.
+        /// Control txtCodigoMoneda.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoAhorro;
+        protected global::System.Web.UI.WebControls.TextBox txtCodigoMoneda;
 
         /// <summary>
         /// Control RequiredFieldValidator7.
@@ -175,6 +175,33 @@ namespace AppWebInternetBanking.Views
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+
+        /// <summary>
+        /// Control ltrCantidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrCantidad;
+
+        /// <summary>
+        /// Control txtCantidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCantidad;
+
+        /// <summary>
+        /// Control RequiredFieldValidator2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
         /// Control lblResultado.

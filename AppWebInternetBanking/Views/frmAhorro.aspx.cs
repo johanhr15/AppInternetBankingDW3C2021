@@ -34,9 +34,9 @@ namespace AppWebInternetBanking.Views
                 gvAhorro.DataSource = ahorro.ToList();
                 gvAhorro.DataBind();
             }
-            catch (Exception)
+            catch (Exception exc)
             {
-                lblStatus.Text = "Hubo un error al cargar la lista de servicios";
+                lblStatus.Text = "Hubo un error al cargar los ahorros. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
         }
@@ -49,27 +49,35 @@ namespace AppWebInternetBanking.Views
                 {
                     if (string.IsNullOrEmpty(txtCodigoMant.Text))//INSERTAR
                     {
-                        Ahorro ahorros = new Ahorro()
+                        Ahorro datos = new Ahorro()
                         {
-                            Codigo = Convert.ToInt32(txtCodigoMant.Text),
                             CuentaOrigen = Convert.ToInt32(txtCuentaOrigenA.Text),
                             Monto = Convert.ToInt32(txtMontoA.Text),
-                            Plazo = Convert.ToInt32(txtPlazo.Text),
+                            Plazo = Convert.ToDecimal(txtPlazo.Text),
                             TipoAhorro = txtTipoAhorro.Text
                         };
+
+                        Ahorro respuestaAhorro = await ahorroManager.Ingresar(datos, Session["Token"].ToString());
+
+
+
+                        if (!string.IsNullOrEmpty(respuestaAhorro.TipoAhorro))
+                        {
+                            lblResultado.Text = "Ahorro ingresado con exito";
+                            lblResultado.Visible = true;
+                            lblResultado.ForeColor = Color.Green;
+                            InicializarControles();
+                        }
                     }
-                }
-            
-                else // modificar
-                {
-                    try
+                    else // modificar
                     {
+
                         Ahorro ahorro = new Ahorro()
                         {
                             Codigo = Convert.ToInt32(txtCodigoMant.Text),
                             CuentaOrigen = Convert.ToInt32(txtCuentaOrigenA.Text),
                             Monto = Convert.ToInt32(txtMontoA.Text),
-                            Plazo = Convert.ToInt32(txtPlazo.Text),
+                            Plazo = Convert.ToDecimal(txtPlazo.Text),
                             TipoAhorro = txtTipoAhorro.Text
                         };
 
@@ -82,14 +90,8 @@ namespace AppWebInternetBanking.Views
                             lblResultado.Visible = true;
                             lblResultado.ForeColor = Color.Green;
                             btnAceptarMant.Visible = false;
-                            InicializarControles();
-
+                            InicializarControles(); 
                         }
-                    }
-                    catch (Exception exc)
-                    {
-                        lblStatus.Text = "Hubo un error en la operacion. " + exc.Message;
-                        lblStatus.Visible = true;
                     }
                 }
             }
@@ -99,96 +101,101 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Visible = true;
             }
         }
-                protected void btnCancelarMant_Click(object sender, EventArgs e)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide",
-                    "$(function() { CloseMantenimiento(); });", true);
 
-            }
-
-            protected async void btnAceptarModal_Click(object sender, EventArgs e)
+        protected async void btnAceptarModal_Click(object sender, EventArgs e)
+        {
+            try
             {
-                try
+                string resultado = string.Empty;
+                resultado = await ahorroManager.Eliminar(lblCodigoEliminar.Text, Session["Token"].ToString());
+                if (!string.IsNullOrEmpty(resultado))
                 {
-                    string resultado = string.Empty;
-                    resultado = await ahorroManager.Eliminar(lblCodigoEliminar.Text, Session["Token"].ToString());
-                    if (!string.IsNullOrEmpty(resultado))
-                    {
-                        ltrModalMensaje.Text = "Solicitud de Ahorro eliminada";
-                        btnAceptarModal.Visible = false;
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
-                        InicializarControles();
-                    }
-                }
-                catch (Exception exc)
-                {
-                    lblStatus.Text = "Hubo un error al cargar el ahorro. " + exc.Message;
-                    lblStatus.Visible = true;
+                    ltrModalMensaje.Text = "Solicitud de Ahorro eliminada";
+                    btnAceptarModal.Visible = false;
+                    //.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { openModal(); });", true);
+                    InicializarControles();
                 }
             }
-
-            private void LimpiarControles()
+            catch (Exception exc)
             {
-
-                foreach (Control item in Page.FindControl("Content1").Controls)
-                {
-                    foreach (Control hijo in item.Controls)
-                    {
-                        if (hijo is TextBox)
-                            ((TextBox)hijo).Text = string.Empty;
-
-                    }
-                }
-
-
-            }
-
-
-            protected void Button1_Click(object sender, EventArgs e)
-            {
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
-            }
-
-            protected void gvAhorro_RowCommand(object sender, GridViewCommandEventArgs e)
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                GridViewRow fila = gvAhorro.Rows[index];
-
-                switch (e.CommandName)
-                {
-                    case "Modificar":
-                        ltrTituloMantenimiento.Text = "Modificar Inversion";
-                        txtCodigoMant.Text = fila.Cells[0].Text;
-                        txtCuentaOrigenA.Text = fila.Cells[1].Text;
-                        txtMontoA.Text = fila.Cells[2].Text;
-                        txtPlazo.Text = fila.Cells[3].Text;
-                        txtTipoAhorro.Text = fila.Cells[4].Text;
-                        btnAceptarMant.Visible = true;
-                        ScriptManager.RegisterStartupScript(this,
-                    this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
-                        break;
-                    case "Eliminar":
-                        lblCodigoEliminar.Text = fila.Cells[0].Text;
-                        lblCodigoEliminar.Visible = false;
-                        ltrModalMensaje.Text = "Confirme que desea eliminar el ahorro " + fila.Cells[0].Text + "-" + fila.Cells[4].Text;
-                        ScriptManager.RegisterStartupScript(this,
-                   this.GetType(), "LaunchServerSide", "$(function() {openModal(); } );", true);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            protected void btnNuevo_Click(object sender, EventArgs e)
-            {
-                ltrTituloMantenimiento.Text = "Nuevo Ahorro";
-                lblResultado.Text = String.Empty;
-
-                LimpiarControles();
-
-                ScriptManager.RegisterStartupScript(this,
-                     this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                lblStatus.Text = "Hubo un error al cargar el ahorro. " + exc.Message;
+                lblStatus.Visible = true;
             }
         }
 
+        private void LimpiarControles()
+        {
+
+            foreach (Control item in Page.Controls)
+            {
+                foreach (Control hijo in item.Controls)
+                {
+                    if (hijo is TextBox)
+                        ((TextBox)hijo).Text = string.Empty;
+
+                }
+            }
+
+
+        }
+
+        protected void gvAhorro_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow fila = gvAhorro.Rows[index];
+
+            switch (e.CommandName)
+            {
+                case "Modificar":
+                    ltrTituloMantenimiento.Text = "Modificar Ahorro";
+                    txtCodigoMant.Text = fila.Cells[0].Text;
+                    txtCuentaOrigenA.Text = fila.Cells[1].Text;
+                    txtMontoA.Text = fila.Cells[2].Text;
+                    txtPlazo.Text = fila.Cells[3].Text;
+                    txtTipoAhorro.Text = fila.Cells[4].Text;
+                    btnAceptarMant.Visible = true;
+                    ScriptManager.RegisterStartupScript(this,
+                this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                    break;
+                case "Eliminar":
+                    lblCodigoEliminar.Text = fila.Cells[0].Text;
+                    lblCodigoEliminar.Visible = false;
+                    ltrModalMensaje.Text = "Confirme que desea eliminar el ahorro " + fila.Cells[0].Text + "-" + fila.Cells[4].Text;
+                    ScriptManager.RegisterStartupScript(this,
+               this.GetType(), "LaunchServerSide", "$(function() {openModal(); } );", true);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        protected void btnNuevo_Click(object sender, EventArgs e)
+        {
+            txtCodigoMant.Text = string.Empty;
+            txtCuentaOrigenA.Text = string.Empty;
+            txtMontoA.Text = string.Empty;
+            txtPlazo.Text = string.Empty;
+            txtTipoAhorro.Text = string.Empty;
+            ltrTituloMantenimiento.Text = "Nuevo Ahorro";
+            lblResultado.Text = String.Empty;
+
+            LimpiarControles();
+
+
+            ScriptManager.RegisterStartupScript(this,
+                 this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+        }
+
+        protected void btnCancelarMant_Click1(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide",
+                                "$(function() { CloseMantenimiento(); });", true);
+        }
+
+        protected void LinkButton1_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "LaunchServerSide", "$(function() { CloseModal(); });", true);
+        }
     }
+
+}

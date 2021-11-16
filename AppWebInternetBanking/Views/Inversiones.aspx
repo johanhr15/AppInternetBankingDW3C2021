@@ -1,7 +1,5 @@
-﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmAhorro.aspx.cs" Inherits="AppWebInternetBanking.Views.frmAhorro" %>
+﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inversiones.aspx.cs" Inherits="AppWebInternetBanking.Views.Inversiones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-
 <script type="text/javascript">
         
        function openModal() {
@@ -19,24 +17,25 @@
         $(document).ready(function () { //filtrar el datagridview
             $("#myInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $("#MainContent_gvAhorro tr").filter(function () {
+                $("#MainContent_gvInversiones tr").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
             });
         });
 </script> 
     <div class="container">
-    <h1>Mantenimiento de Ahorro</h1>
+    <h1>Mantenimiento de Inversiones</h1>
     <input id="myInput" placeholder="Buscar" class="form-control" type="text" />
-    <asp:GridView ID="gvAhorro" OnRowCommand="gvAhorro_RowCommand" runat="server" AutoGenerateColumns="false"
+    <asp:GridView ID="gvInversiones" OnRowCommand="gvInversiones_RowCommand" runat="server" AutoGenerateColumns="false"
       CssClass="table table-stripped" AlternatingRowStyle-BackColor="LightBlue" HeaderStyle-CssClass="navy" 
         HeaderStyle-BackColor="#243054" HeaderStyle-ForeColor="White" Width="100%">
         <Columns>
             <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
             <asp:BoundField HeaderText="CuentaOrigen" DataField="CuentaOrigen" />
-            <asp:BoundField HeaderText="Monto" DataField="Monto" />
+            <asp:BoundField HeaderText="FondosInversion" DataField="FondosInversion" />
             <asp:BoundField HeaderText="Plazo" DataField="Plazo" />
-            <asp:BoundField HeaderText="TipoAhorro" DataField="TipoAhorro" />
+            <asp:BoundField HeaderText="CodigoMoneda" DataField="CodigoMoneda" />
+            <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
             <asp:ButtonField HeaderText="Modificar" CommandName="Modificar" 
                 ItemStyle-HorizontalAlign="Center" ControlStyle-CssClass="btn btn-primary" ButtonType="Button" Text="Modificar" />
             <asp:ButtonField HeaderText="Eliminar" CommandName="Eliminar"
@@ -65,21 +64,21 @@
                   <td><asp:TextBox ID="txtCodigoMant" runat="server" Enabled="false" CssClass="form-control" /></td>
               </tr>
               <tr>
-                  <td><asp:Literal ID="ltrCuentaOrigenA" Text="CuentaOrigenA" runat="server" /></td>
-                  <td><asp:TextBox ID="txtCuentaOrigenA" CssClass="form-control" runat="server"> 
+                  <td><asp:Literal ID="ltrCuentaOrigen" Text="CuentaOrigen" runat="server" /></td>
+                  <td><asp:TextBox ID="txtCuentaOrigen" CssClass="form-control" runat="server"> 
                   </asp:TextBox></td>
                   <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server"
-                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtCuentaOrigenA" EnableClientScript="False"></asp:RequiredFieldValidator></td>
+                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtCuentaOrigen" EnableClientScript="False"></asp:RequiredFieldValidator></td>
 
                 
               </tr>
                 <tr>
-                    <td><asp:Literal ID="ltrMontoA" Text="FondosMontoA" runat="server" /></td>
-                    <td><asp:TextBox ID="txtMontoA" runat="server" CssClass="form-control"></asp:TextBox></td>
+                    <td><asp:Literal ID="ltrFondosInversion" Text="FondosInversion" runat="server" /></td>
+                    <td><asp:TextBox ID="txtFondosInversion" runat="server" CssClass="form-control"></asp:TextBox></td>
                     <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server"
-                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtMontoA" EnableClientScript="False"></asp:RequiredFieldValidator></td>
+                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtFondosInversion" EnableClientScript="False"></asp:RequiredFieldValidator></td>
 
                 </tr>
                 <tr>
@@ -91,12 +90,19 @@
 
                 </tr>
                <tr>
-                    <td><asp:Literal ID="ltrTipoAhorro" Text="TipoAhorro" runat="server" /></td>
-                    <td><asp:TextBox ID="txtTipoAhorro"  runat="server" CssClass="form-control"></asp:TextBox></td>
+                    <td><asp:Literal ID="ltrCodigoMoneda" Text="CodigoMoneda" runat="server" /></td>
+                    <td><asp:TextBox ID="txtCodigoMoneda"  runat="server" CssClass="form-control"></asp:TextBox></td>
                     <td>
                             <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server"
-                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtTipoAhorro" EnableClientScript="False"></asp:RequiredFieldValidator></td>
+                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtCodigoMoneda" EnableClientScript="False"></asp:RequiredFieldValidator></td>
 
+                </tr>
+              <tr>
+                    <td><asp:Literal ID="ltrCantidad" Text="Cantidad" runat="server" /></td>
+                    <td><asp:TextBox ID="txtCantidad"  runat="server" CssClass="form-control"></asp:TextBox></td>
+                    <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server"
+                                ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtCantidad" EnableClientScript="False"></asp:RequiredFieldValidator></td>
                 </tr>
 
           </table>
@@ -104,7 +110,7 @@
       </div>
       <div class="modal-footer">
         <asp:LinkButton type="button" OnClick="btnAceptarMant_Click" CssClass="btn btn-success" ID="btnAceptarMant" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" />
-         <asp:LinkButton type="button"  CssClass="btn btn-danger" ID="btnCancelarMant" OnClick="btnCancelarMant_Click1" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-remove'></span> Cerrar" />
+         <asp:LinkButton type="button"  CssClass="btn btn-danger" ID="btnCancelarMant" OnClick="btnCancelarMant_Click" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-remove'></span> Cerrar" />
       </div>
     </div>
   </div>
@@ -130,4 +136,3 @@
     </div>
   </div>
 </asp:Content>
-      

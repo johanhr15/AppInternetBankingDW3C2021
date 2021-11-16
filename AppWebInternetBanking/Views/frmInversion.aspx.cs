@@ -15,7 +15,8 @@ namespace AppWebInternetBanking.Views
     {
         IEnumerable<Inversion> inversion = new ObservableCollection<Inversion>();
         InversionManager inversionManager = new InversionManager();
-
+        IEnumerable<Cuenta> cuentas = new ObservableCollection<Cuenta>();
+        CuentaManager cuentaManager = new CuentaManager();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,6 +43,20 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Visible = true;
             }
 
+            try
+            {
+                cuentas = await cuentaManager.ObtenerCuentas(Session["Token"].ToString());
+                ddlCuentaOrigen.DataSource = cuentas.ToList();
+                ddlCuentaOrigen.DataBind();
+                ddlCuentaOrigen.DataTextField = "IBAN";
+                ddlCuentaOrigen.DataValueField = "Codigo";
+                ddlCuentaOrigen.DataBind();
+            }
+            catch (Exception exc)
+            {
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
+                lblStatus.Visible = true;
+            }
         }
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
