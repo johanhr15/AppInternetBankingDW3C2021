@@ -55,8 +55,11 @@ namespace AppWebInternetBanking.Views
 
                 Error errorIngresado = await errorManager.Ingresar(error);
 
-                lblStatus.Text = "Hubo un error al cargar la lista de marchamos";
-                lblStatus.Visible = true;
+                //lblStatus.Text = "Hubo un error al cargar la lista de marchamos";
+                //lblStatus.Visible = true;
+
+                ltrErrorMessage.Text = "Hubo un error al cargar la lista de marchamos";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
             }
         }
 
@@ -65,7 +68,10 @@ namespace AppWebInternetBanking.Views
 
             try
             {
-                if (string.IsNullOrEmpty(txtidMarchamo.Text)) //insertar
+                if (string.IsNullOrEmpty(txtidMarchamo.Text)  && !string.IsNullOrEmpty(txtPlaca.Text) &&
+                    !string.IsNullOrEmpty(txtMonto.Text) && !string.IsNullOrEmpty(txtSoa.Text) && !string.IsNullOrEmpty(txtImpPro.Text)
+                    && !string.IsNullOrEmpty(txtImpMuni.Text)  && !string.IsNullOrEmpty(txtFauna.Text) &&  !string.IsNullOrEmpty(txtIva.Text) &&
+                    !string.IsNullOrEmpty(txtAcsv.Text)) //insertar
                 {
                     Marchamo marchamo = new Marchamo()
                     {
@@ -88,25 +94,29 @@ namespace AppWebInternetBanking.Views
                         lblResultado.ForeColor = Color.Green;
                         btnAceptarMant.Visible = false;
                         InicializarControles();
-
-                        Correo correo = new Correo();
-                        correo.Enviar("Nuevo marchamo incluido", marchamoInsertado.idPlaca, "bgonzaleza003@gmail.com",
-                            Convert.ToInt32(Session["CodigoUsuario"].ToString()));
-
+                        // Correo correo = new Correo();
+                        // correo.Enviar("Nuevo marchamo incluido", marchamoInsertado.idPlaca, "bgonzaleza003@gmail.com",
+                        // Convert.ToInt32(Session["CodigoUsuario"].ToString()));
                         ScriptManager.RegisterStartupScript(this,
                     this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al ingresar nuevo marchamo";
-                        lblResultado.Visible = true;
-                        lblResultado.ForeColor = Color.Maroon;
+                        //lblResultado.Text = "Hubo un error al ingresar nuevo marchamo";
+                        //lblResultado.Visible = true;
+                        //lblResultado.ForeColor = Color.Maroon;
+
+                        ltrErrorMessage.Text = "Hubo un error al ingresar nuevo marchamo";
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
                     }
 
                 }
 
 
-                else // modificar
+                else if(!string.IsNullOrEmpty(txtidMarchamo.Text) && !string.IsNullOrEmpty(txtPlaca.Text) &&
+                    !string.IsNullOrEmpty(txtMonto.Text) && !string.IsNullOrEmpty(txtSoa.Text) && !string.IsNullOrEmpty(txtImpPro.Text)
+                    && !string.IsNullOrEmpty(txtImpMuni.Text) && !string.IsNullOrEmpty(txtFauna.Text) && !string.IsNullOrEmpty(txtIva.Text) &&
+                    !string.IsNullOrEmpty(txtAcsv.Text)) // modificar
                 {
                     Marchamo marchamo = new Marchamo()
                     {
@@ -131,19 +141,27 @@ namespace AppWebInternetBanking.Views
                         btnAceptarMant.Visible = false;
                         InicializarControles();
 
-                        Correo correo = new Correo();
-                        correo.Enviar("Servicio actualizado con exito", marchamoActualizado.idPlaca, "bgonzaleza003@gmail.com",
-                            Convert.ToInt32(Session["CodigoUsuario"].ToString()));
+                        //Correo correo = new Correo();
+                        //correo.Enviar("Servicio actualizado con exito", marchamoActualizado.idPlaca, "bgonzaleza003@gmail.com",
+                        //Convert.ToInt32(Session["CodigoUsuario"].ToString()));
 
                         ScriptManager.RegisterStartupScript(this,
                     this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
                     }
                     else
                     {
-                        lblResultado.Text = "Hubo un error al actualizar la operacion";
-                        lblResultado.Visible = true;
-                        lblResultado.ForeColor = Color.Maroon;
+                        //lblResultado.Text = "Hubo un error al actualizar el marchamo";
+                        //lblResultado.Visible = true;
+                        //lblResultado.ForeColor = Color.Maroon;
+
+                        ltrErrorMessage.Text = "Hubo un error al actualizar el marchamo";
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
                     }
+                }
+                else
+                {
+                    ltrErrorMessage.Text = "Ingrese todos los datos e intente nuevamente.";
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
                 }
 
             }catch(Exception ex)

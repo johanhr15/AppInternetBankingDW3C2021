@@ -192,4 +192,25 @@
         </div>
     </div>
 
+
+        <div id="modalError" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <asp:Literal ID="ltrErrorMessage" runat="server" />
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <asp:LinkButton type="button" CssClass="btn btn-danger" ID="LinkButton2" OnClick="btnCancelarModal_Click" 
+                        runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-remove'></span> Cerrar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
 </asp:Content>

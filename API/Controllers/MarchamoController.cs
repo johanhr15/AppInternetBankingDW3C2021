@@ -268,7 +268,7 @@ namespace API.Controllers
                     carPlateExists = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false ;
             }
@@ -306,7 +306,7 @@ namespace API.Controllers
                     idMarchamoExists = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

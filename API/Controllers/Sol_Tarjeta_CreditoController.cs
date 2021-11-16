@@ -273,7 +273,7 @@ namespace API.Controllers
                     idSolitudeExists = true;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

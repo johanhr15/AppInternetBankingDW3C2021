@@ -88,9 +88,9 @@
                             <td>
                                 <asp:Literal ID="ltrfechaNacimiento" Text="Fecha Nacimiento" runat="server" /></td>
                             <td>
-                                <asp:TextBox ID="txtfechaNacimiento" runat="server" TextMode="Date" CssClass="form-control" /></td>
-                 
+                                <asp:TextBox ID="txtfechaNacimiento" runat="server" TextMode="Date" CssClass="form-control" />
 
+                            </td>
 
                         </tr>
                         <tr>
@@ -101,7 +101,10 @@
                             <td>
                                 <asp:RegularExpressionValidator runat="server" ID="rexIngresoMensual"
                                     ControlToValidate="txtIngresoMensual" ValidationExpression="\d+([,\.]\d{1,2})?"
-                                    ErrorMessage="Ingresa el ingreso en formato decimal (0.0)" ForeColor="Red" /></td>
+                                    ErrorMessage="Ingresa el ingreso en formato decimal (0.0)" ForeColor="Red" />
+                                
+                            </td>
+                           
                         </tr>
                         <tr>
                             <td>
@@ -129,7 +132,10 @@
                             <td>
                                 <asp:RegularExpressionValidator runat="server" ID="rexNombreEmpresa"
                                     ControlToValidate="txtNombreEmpresa" ValidationExpression="^[a-zA-Z. \w]{3,30}$"
-                                    ErrorMessage="Ingrese el nombre de la empresa con un minimo de 3 caracteres y maximo 30 caracteres" ForeColor="Red" /></td>
+                                    ErrorMessage="Ingrese el nombre de la empresa con un minimo de 3 caracteres y maximo 30 caracteres" ForeColor="Red" />
+
+                            </td>
+                       
                         </tr>
                         <tr>
                             <td>
@@ -139,7 +145,10 @@
                             <td>
                                 <asp:RegularExpressionValidator runat="server" ID="rexTelefonoTrabajo"
                                     ControlToValidate="txtTelefonoTrabajo" ValidationExpression="^[0-9]{1,8}"
-                                    ErrorMessage="Solo se aceptan numeros de 8 digitos" ForeColor="Red" /></td>
+                                    ErrorMessage="Solo se aceptan numeros de 8 digitos" ForeColor="Red" />
+
+                            </td>
+
                         </tr>
                         <tr>
                             <td>
@@ -149,7 +158,10 @@
                             <td>
                                 <asp:RegularExpressionValidator runat="server" ID="rexPuesto"
                                     ControlToValidate="txtPuesto" ValidationExpression="^[a-zA-Z. \w]{3,50}$"
-                                    ErrorMessage="Ingrese el puesto con un minimo de 3 caracteres y maximo 50 caracteres" ForeColor="Red" /></td>
+                                    ErrorMessage="Ingrese el puesto con un minimo de 3 caracteres y maximo 50 caracteres" ForeColor="Red" />
+
+                            </td>
+
                         </tr>
 
                         <tr>
@@ -170,9 +182,10 @@
                             <td>
                                 <asp:TextBox ID="txtTelefonoContacto" runat="server" CssClass="form-control" /></td>
                             <td>
-                                <asp:RegularExpressionValidator runat="server" ID="RegularExpressionValidator2"
+                                <asp:RegularExpressionValidator runat="server" ID="rexTelefono"
                                     ControlToValidate="txtTelefonoContacto" ValidationExpression="^[0-9]{1,8}"
-                                    ErrorMessage="Solo se aceptan numeros de 8 digitos" ForeColor="Red" /></td>
+                                    ErrorMessage="Solo se aceptan numeros de 8 digitos" ForeColor="Red" />
+                            </td>
                         </tr>
 
                     </table>
@@ -203,6 +216,27 @@
                 <div class="modal-footer">
                     <asp:LinkButton type="button" CssClass="btn btn-success" ID="btnAceptarModal" OnClick="btnAceptarModal_Click" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-ok'></span> Aceptar" />
                     <asp:LinkButton type="button" CssClass="btn btn-danger" ID="btnCancelarModal" OnClick="btnCancelarModal_Click" runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-remove'></span> Cerrar" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modalError" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Error</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <asp:Literal ID="ltrErrorMessage" runat="server" />
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <asp:LinkButton type="button" CssClass="btn btn-danger" ID="LinkButton2" OnClick="btnCancelarModal_Click" 
+                        runat="server" Text="<span aria-hidden='true' class='glyphicon glyphicon-remove'></span> Cerrar" />
                 </div>
             </div>
         </div>

@@ -67,8 +67,11 @@ namespace AppWebInternetBanking.Views
 
                 Error errorIngresado = await errorManager.Ingresar(error);
 
-                lblStatus.Text = "Hubo un error al cargar la lista de solitudes";
-                lblStatus.Visible = true;
+                //lblStatus.Text = "Hubo un error al cargar la lista de solitudes";
+                //lblStatus.Visible = true;
+
+                ltrErrorMessage.Text = "Hubo un error al cargar la lista de solicitudes de tarjetas";
+                ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
             }
         }
 
@@ -77,9 +80,13 @@ namespace AppWebInternetBanking.Views
             try
             {
 
-                if (string.IsNullOrEmpty(txtIdSolTarjeta.Text)) //insertar
+                if (string.IsNullOrEmpty(txtIdSolTarjeta.Text) && !string.IsNullOrEmpty(txtfechaNacimiento.Text) &&
+                    !string.IsNullOrEmpty(txtIngresoMensual.Text) && !string.IsNullOrEmpty(txtNombreEmpresa.Text)
+                    && !string.IsNullOrEmpty(txtTelefonoTrabajo.Text) && !string.IsNullOrEmpty(txtTelefonoContacto.Text)) //insertar
                 {
 
+                     if (CalculateAge( Convert.ToDateTime(txtfechaNacimiento.Text)) >= 18)
+                    {
                         Sol_Tarjeta_Credito sol_Tarjeta_Credito = new Sol_Tarjeta_Credito()
                         {
                             cedula = Convert.ToInt32(Session["CodigoUsuario"].ToString()),
@@ -113,17 +120,27 @@ namespace AppWebInternetBanking.Views
                         }
                         else
                         {
-                            lblResultado.Text = "Hubo un error al ingresar una nueva solicitud";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Maroon;
+                            ltrErrorMessage.Text = "Hubo un error al ingresar una nueva solicitud";
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
                         }
 
                     }
-             
+
+                    else
+                    {
+                        ltrErrorMessage.Text = "Ingresa una fecha de un mayor de edad.";
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
+                    }
+
+                } 
               
-                else // modificar
+                else if(!string.IsNullOrEmpty(txtIdSolTarjeta.Text) && !string.IsNullOrEmpty(txtfechaNacimiento.Text) &&
+                    !string.IsNullOrEmpty(txtIngresoMensual.Text) && !string.IsNullOrEmpty(txtNombreEmpresa.Text)
+                    && !string.IsNullOrEmpty(txtTelefonoTrabajo.Text) && !string.IsNullOrEmpty(txtTelefonoContacto.Text))
                 {
-                   
+                    if (CalculateAge(Convert.ToDateTime(txtfechaNacimiento.Text)) >= 18)
+                    {
+
                         Sol_Tarjeta_Credito sol_Tarjeta_Credito = new Sol_Tarjeta_Credito()
                         {
                             idSolTarjeta = Convert.ToInt32(txtIdSolTarjeta.Text),
@@ -160,11 +177,25 @@ namespace AppWebInternetBanking.Views
                         }
                         else
                         {
-                            lblResultado.Text = "Hubo un error al actualizar la solicitud";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Maroon;
+                            ltrErrorMessage.Text = "Hubo un error al actualizar la solicitud";
+                            ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
                         }
-         
+
+                    }
+                    else
+                    {
+                        ltrErrorMessage.Text = "Ingresa una fecha de un mayor de edad.";
+                        ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
+                    }
+
+
+
+                }
+                else
+                {
+                    ltrErrorMessage.Text = "Ingrese todos los datos e intente nuevamente.";
+                    ScriptManager.RegisterStartupScript(Page, Page.GetType(), "", "$(document).ready(function () {$('#modalError').modal();});", true);
+
                 }
 
             }
@@ -375,7 +406,7 @@ namespace AppWebInternetBanking.Views
         }
 
 
-        private int calculateAge(DateTime birthAge)
+        private int CalculateAge(DateTime birthAge)
         {
             int age = 0;
             age = DateTime.Now.Subtract(birthAge).Days;

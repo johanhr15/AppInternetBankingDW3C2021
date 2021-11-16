@@ -12,6 +12,7 @@ namespace AppWebInternetBanking
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+       
 
         }
 
@@ -20,7 +21,13 @@ namespace AppWebInternetBanking
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
             Response.Cache.SetExpires(DateTime.MinValue);
-
+            try
+            {
+                ltrNombre.Text = Session["Nombre"].ToString();
+            }
+            catch (Exception)
+            {
+            }
             base.OnInit(e);
         }
 

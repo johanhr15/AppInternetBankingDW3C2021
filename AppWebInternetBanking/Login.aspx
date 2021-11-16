@@ -6,11 +6,13 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Iniciar sesion</title>
-        <style>
+
+
+
+
+<style>
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
-
-
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -103,8 +105,10 @@ top: 0;
 width: 100%; /* Full width */
 height: 100%; /* Full height */
 overflow: auto; /* Enable scroll if needed */
-background-color: #474e5d;
-padding-top: 50px;
+background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding-top: 0px;
 }
 
 
@@ -160,6 +164,11 @@ clear: both;
 display: table;
 }
 
+.img_logo{
+    width: 250px;
+    height:200px;
+}
+
 
 
 /* Change styles for cancel button and signup button on extra small screens */
@@ -174,10 +183,10 @@ width: 100%;
         <div id="myModal" class="modal">
             <form class="modal-content animate" runat="server">
                 <div class="imgcontainer">
-                    <img src="img/ulacit.jpg" />
+                   <!-- <img class="img_logo" src="img/spacelogo.png" /> ---> 
                 </div>
                 <div class="container">
-                    <h1>Login</h1>
+                    <h1 style="text-align:center">Inicio de sesión</h1>
                     <asp:TextBox ID="txtUsername" runat="server" Placeholder="Ingrese su nombre de usuario"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfqvUsername" runat="server" ErrorMessage="El nombre de usuario es requerido"
                         ControlToValidate="txtUsername" ForeColor="Maroon" ></asp:RequiredFieldValidator>
@@ -189,7 +198,7 @@ width: 100%;
                 <div class="container">
                     <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CssClass="normalbtn" OnClick="btnAceptar_Click" />
                     <input type="reset" value="Limpiar" class="cancelbtn" />
-                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Registro.aspx" >Registrarme</asp:HyperLink>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Registro.aspx" >No tienes usuario? Registrate aquí</asp:HyperLink>
                 </div>
             </form>
         </div>
