@@ -88,7 +88,7 @@
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrCodigoCuenta" Text="Codigo Cuenta" runat="server" /></td>
-                  <td><asp:TextBox ID="txtCodigoCuenta" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:DropDownList ID="ddlCodigoCuenta" CssClass="form-control" runat="server"></asp:DropDownList></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrCodigoMoneda" Text="Moneda" runat="server" /></td>

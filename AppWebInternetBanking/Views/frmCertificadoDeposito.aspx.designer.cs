@@ -132,13 +132,13 @@ namespace AppWebInternetBanking.Views
         protected global::System.Web.UI.WebControls.Literal ltrCodigoCuenta;
 
         /// <summary>
-        /// txtCodigoCuenta control.
+        /// ddlCodigoCuenta control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoCuenta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCodigoCuenta;
 
         /// <summary>
         /// ltrCodigoMoneda control.

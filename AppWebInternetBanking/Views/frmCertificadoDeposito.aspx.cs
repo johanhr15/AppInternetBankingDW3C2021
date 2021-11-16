@@ -20,6 +20,9 @@ namespace AppWebInternetBanking.Views
         IEnumerable<Moneda> monedas = new ObservableCollection<Moneda>();
         MonedaManager monedaManager = new MonedaManager();
 
+        IEnumerable<Cuenta> cuentas = new ObservableCollection<Cuenta>();
+        CuentaManager cuentamanager = new CuentaManager();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -87,6 +90,21 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
+
+            try
+            {
+                cuentas = await cuentamanager.ObtenerCuentas(Session["Token"].ToString());
+                ddlCodigoCuenta.DataSource = cuentas.ToList();
+                ddlCodigoCuenta.DataBind();
+                ddlCodigoCuenta.DataTextField = "IBAN";
+                ddlCodigoCuenta.DataValueField = "Codigo";
+                ddlCodigoCuenta.DataBind();
+            }
+            catch (Exception exc)
+            {
+                lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
+                lblStatus.Visible = true;
+            }
         }
 
         protected void btnNuevo_Click(object sender, EventArgs e)
@@ -97,7 +115,6 @@ namespace AppWebInternetBanking.Views
             ltrCodigoMant.Visible = true;
             txtCodigoMant.Visible = true;
             ltrCodigoUsuario.Visible = true;
-            txtCodigoCuenta.Visible = true;
             ltrCodigoCuenta.Visible = true;
             ltrCodigoMoneda.Visible = true;
             txtMonto.Visible = true;
@@ -125,7 +142,7 @@ namespace AppWebInternetBanking.Views
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
                     txtCodigoMant.Text = row.Cells[0].Text.Trim();
                     ddlCodigoUsuario.SelectedValue = row.Cells[1].Text.Trim();
-                    txtCodigoCuenta.Text = row.Cells[2].Text.Trim();
+                    ddlCodigoCuenta.SelectedValue = row.Cells[2].Text.Trim();
                     ddlCodigoMoneda.SelectedValue = row.Cells[3].Text.Trim();
                     txtMonto.Text = row.Cells[4].Text.Trim();
                     txtInteres.Text = row.Cells[5].Text.Trim();
@@ -157,7 +174,7 @@ namespace AppWebInternetBanking.Views
                         CertificadoDeposito certificado = new CertificadoDeposito()
                         {
                             CodigoUsuario = Convert.ToInt32(ddlCodigoUsuario.SelectedValue),
-                            CodigoCuenta = Convert.ToInt32(txtCodigoCuenta.Text),
+                            CodigoCuenta = Convert.ToInt32(ddlCodigoCuenta.SelectedValue),
                             CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
                             Monto = Convert.ToDecimal(txtMonto.Text),
                             Interes = txtInteres.Text,
@@ -202,7 +219,7 @@ namespace AppWebInternetBanking.Views
                         {
                             Codigo = Convert.ToInt32(txtCodigoMant.Text),
                             CodigoUsuario = Convert.ToInt32(ddlCodigoUsuario.SelectedValue),
-                            CodigoCuenta = Convert.ToInt32(txtCodigoCuenta.Text),
+                            CodigoCuenta = Convert.ToInt32(ddlCodigoCuenta.SelectedValue),
                             CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
                             Monto = Convert.ToDecimal(txtMonto.Text),
                             Interes = txtInteres.Text,
