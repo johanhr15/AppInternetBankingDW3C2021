@@ -96,26 +96,41 @@
               <tr>
                   <td><asp:Literal ID="ltrTipoCasa" Text="Tipo Casa" runat="server" /></td>
                   <td><asp:TextBox ID="txtTipoCasa" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtTipoCasa" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrTasaInteres" Text="Tasa de Interes" runat="server" /></td>
                   <td><asp:TextBox ID="txtTasaInteres" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtTasaInteres" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrValorCasa" Text="Valor Casa" runat="server" /></td>
                   <td><asp:TextBox ID="txtValorCasa" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtValorCasa" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrPrima" Text="Prima" runat="server" /></td>
                   <td><asp:TextBox ID="txtPrima" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtPrima" EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrPlazoMeses" Text="Plazo Meses" runat="server" /></td>
                   <td><asp:TextBox ID="txtPlazoMeses" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtPlazoMeses" EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrFechaInicio" Text="Fecha Inicio" runat="server" /></td>
                   <td><asp:TextBox ID="txtFechaInicio" TextMode="DateTimeLocal" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtFechaInicio" EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal Text="Estado" runat="server" /></td>

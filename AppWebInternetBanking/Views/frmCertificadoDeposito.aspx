@@ -98,18 +98,30 @@
               <tr>
                   <td><asp:Literal ID="ltrMonto" Text="Monto" runat="server" /></td>
                   <td><asp:TextBox ID="txtMonto" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                 <td><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtMonto" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td> 
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrInteres" Text="Interes" runat="server" /></td>
                   <td><asp:TextBox ID="txtInteres" runat="server" TextMode="Number" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtInteres" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrFechaInicio" Text="FechaInicio" runat="server" /></td>
                   <td><asp:TextBox ID="txtFechaInicio" TextMode="DateTimeLocal" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtFechaInicio" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
               <tr>
                   <td><asp:Literal ID="ltrFechaFin" Text="FechaFin" runat="server" /></td>
                   <td><asp:TextBox ID="txtFechaFin" TextMode="DateTimeLocal" runat="server" CssClass="form-control" /></td>
+                  <td><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" 
+                      ErrorMessage="*Espacio Obligatorio*" ControlToValidate="txtFechaFin" 
+                      EnableClientScript="False"></asp:RequiredFieldValidator></td>
               </tr>
           </table>
           <asp:Label ID="lblResultado" ForeColor="Maroon" Visible="False" runat="server" />

@@ -96,7 +96,7 @@ namespace AppWebInternetBanking.Views
                 cuentas = await cuentamanager.ObtenerCuentas(Session["Token"].ToString());
                 ddlCodigoCuenta.DataSource = cuentas.ToList();
                 ddlCodigoCuenta.DataBind();
-                ddlCodigoCuenta.DataTextField = "IBAN";
+                ddlCodigoCuenta.DataTextField = "Descripcion";
                 ddlCodigoCuenta.DataValueField = "Codigo";
                 ddlCodigoCuenta.DataBind();
             }
