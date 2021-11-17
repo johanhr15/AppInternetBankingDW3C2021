@@ -61,7 +61,6 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Text = "Hubo un error al cargar la lista de servicios. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
-
             try
             {
                 monedas = await monedaManager.ObtenerMonedas(Session["Token"].ToString());
@@ -80,68 +79,94 @@ namespace AppWebInternetBanking.Views
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(txtCodigoMant.Text))//INSERTAR
             {
-                if (Page.IsValid)
+                try
                 {
-                    if (string.IsNullOrEmpty(txtCodigoMant.Text))//INSERTAR
+                    Inversion inversiones = new Inversion()
                     {
-                        Inversion inversiones = new Inversion()
-                        {
-                            Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                            CuentaOrigen = Convert.ToInt32(ddlCuentaOrigen.SelectedValue),
-                            FondosInversion = txtFondosInversion.Text,
-                            Plazo = txtPlazo.Text,
-                            CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
-                            Cantidad = Convert.ToInt32(txtMonto.Text)
+                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                        CuentaOrigen = Convert.ToInt32(ddlCuentaOrigen.SelectedValue),
+                        FondosInversion = txtFondosInversion.Text,
+                        Plazo = txtPlazo.Text,
+                        CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
+                        Cantidad = Convert.ToInt32(txtMonto.Text)
 
-                        };
+                    };
+                    Inversion inversionIngresada = await inversionManager.Ingresar(inversiones, Session["Token"].ToString());
+
+                    if (!string.IsNullOrEmpty(inversionIngresada.FondosInversion))
+                    {
+                        lblResultado.Text = "Solicitud de inversion ingresada con exito";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Green;
+                        btnAceptarMant.Visible = false;
+                        InicializarControles();
+
+
+
+                        ScriptManager.RegisterStartupScript(this,
+                    this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
+                    }
+                }
+                catch
+                {
+                    lblResultado.Text = "Hubo un error al efectuar la operacion";
+                    lblResultado.Visible = true;
+                    lblResultado.ForeColor = Color.Maroon;
+                }
+            }
+
+            else // MODIFICAR
+            {
+                try
+                {
+                    Inversion inversion = new Inversion()
+                    {
+                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                        CuentaOrigen = Convert.ToInt32(ddlCuentaOrigen.SelectedValue),
+                        FondosInversion = txtFondosInversion.Text,
+                        Plazo = txtPlazo.Text,
+                        CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
+                        Cantidad = Convert.ToInt32(txtMonto.Text)
+                    };
+
+
+                    Inversion respuestaInversion = await inversionManager.Actualizar(inversion, Session["Token"].ToString());
+
+                    if (!string.IsNullOrEmpty(respuestaInversion.FondosInversion))
+                    {
+                        lblResultado.Text = "Inversion modificada con exito";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Green;
+                        btnAceptarMant.Visible = false;
+                        InicializarControles();
+
+                        ScriptManager.RegisterStartupScript(this,
+                    this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
                     }
                 }
 
-                else // MODIFICAR
+
+                catch (Exception exc)
                 {
-                    try
-                    {
-                        Inversion inversion = new Inversion()
-                        {
-                            Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                            CuentaOrigen = Convert.ToInt32(ddlCuentaOrigen.SelectedValue),
-                            FondosInversion = txtFondosInversion.Text,
-                            Plazo = txtPlazo.Text,
-                            CodigoMoneda = Convert.ToInt32(ddlCodigoMoneda.SelectedValue),
-                            Cantidad = Convert.ToInt32(txtMonto.Text)
-                        };
-
-
-                        Inversion respuestaInversion = await inversionManager.Actualizar(inversion, Session["Token"].ToString());
-
-                        if (!string.IsNullOrEmpty(respuestaInversion.FondosInversion))
-                        {
-                            lblResultado.Text = "Inversion modificada con exito";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Green;
-                            btnAceptarMant.Visible = false;
-                            InicializarControles();
-
-                            ScriptManager.RegisterStartupScript(this,
-                        this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-                        lblStatus.Text = "Hubo un error en la operacion. " + exc.Message;
-                        lblStatus.Visible = true;
-                    }
+                    lblStatus.Text = "Hubo un error en la operacion. " + exc.Message;
+                    lblStatus.Visible = true;
                 }
-
-            }
-            catch (Exception exc)
-            {
-                lblStatus.Text = "Hubo un error en la operacion. " + exc.Message;
-                lblStatus.Visible = true;
-            }
         }
+    }
 
 
 
@@ -181,12 +206,12 @@ namespace AppWebInternetBanking.Views
                 case "Modificar":
                     ltrTituloMantenimiento.Text = "Modificar Inversion";
                     btnAceptarMant.ControlStyle.CssClass = "btn btn-primary";
-                    txtCodigoMant.Text = fila.Cells[0].Text.Trim();
-                    ddlCuentaOrigen.SelectedValue = fila.Cells[1].Text.Trim();
-                    txtFondosInversion.Text = fila.Cells[2].Text.Trim();
-                    txtPlazo.Text = fila.Cells[3].Text.Trim();
-                    ddlCodigoMoneda.SelectedValue = fila.Cells[4].Text.Trim();
-                    txtMonto.Text = fila.Cells[5].Text.Trim();
+                    txtCodigoMant.Text = fila.Cells[0].Text;
+                    ddlCuentaOrigen.SelectedValue = fila.Cells[1].Text;
+                    txtFondosInversion.Text = fila.Cells[2].Text;
+                    txtPlazo.Text = fila.Cells[3].Text;
+                    ddlCodigoMoneda.SelectedValue = fila.Cells[4].Text;
+                    txtMonto.Text = fila.Cells[5].Text;
                     btnAceptarMant.Visible = true;
                     ScriptManager.RegisterStartupScript(this,
                 this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
@@ -249,3 +274,5 @@ namespace AppWebInternetBanking.Views
         }
     }
 }
+
+

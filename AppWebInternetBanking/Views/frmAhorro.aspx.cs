@@ -16,7 +16,7 @@ namespace AppWebInternetBanking.Views
     {
         IEnumerable<Ahorro> ahorro = new ObservableCollection<Ahorro>();
         AhorroManager ahorroManager = new AhorroManager();
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -41,70 +41,90 @@ namespace AppWebInternetBanking.Views
                 lblStatus.Text = "Hubo un error al cargar los ahorros. Detalle: " + exc.Message;
                 lblStatus.Visible = true;
             }
-            
+
         }
 
         protected async void btnAceptarMant_Click(object sender, EventArgs e)
         {
-            try
+            if (string.IsNullOrEmpty(txtCodigoMant.Text))//INSERTAR
             {
-                if (Page.IsValid)
+                try
+
                 {
-                    if (string.IsNullOrEmpty(txtCodigoMant.Text))//INSERTAR
+                    Ahorro datos = new Ahorro()
                     {
-                        Ahorro datos = new Ahorro()
-                        {
-                            CuentaOrigen = Convert.ToInt32(txtCuentaOrigen.Text),
-                            Monto = Convert.ToInt32(txtMontoA.Text),
-                            Plazo = Convert.ToDecimal(txtPlazo.Text),
-                            TipoAhorro = txtTipoAhorro.Text
-                        };
+                        CuentaOrigen = Convert.ToInt32(txtCuentaOrigen.Text),
+                        Monto = Convert.ToInt32(txtMontoA.Text),
+                        Plazo = Convert.ToDecimal(txtPlazo.Text),
+                        TipoAhorro = txtTipoAhorro.Text
+                    };
 
-                        Ahorro respuestaAhorro = await ahorroManager.Ingresar(datos, Session["Token"].ToString());
+                    Ahorro respuestaAhorro = await ahorroManager.Ingresar(datos, Session["Token"].ToString());
 
+                    if (!string.IsNullOrEmpty(respuestaAhorro.TipoAhorro))
+                    {
+                        lblResultado.Text = "Ahorro ingresado con exito";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Green;
+                        InicializarControles();
 
-
-                        if (!string.IsNullOrEmpty(respuestaAhorro.TipoAhorro))
-                        {
-                            lblResultado.Text = "Ahorro ingresado con exito";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Green;
-                            InicializarControles();
-                        }
+                        ScriptManager.RegisterStartupScript(this,
+                this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
                     }
-                    else // modificar
+                    else
                     {
-
-                        Ahorro ahorro = new Ahorro()
-                        {
-                            Codigo = Convert.ToInt32(txtCodigoMant.Text),
-                            CuentaOrigen = Convert.ToInt32(txtCuentaOrigen.Text),
-                            Monto = Convert.ToInt32(txtMontoA.Text),
-                            Plazo = Convert.ToDecimal(txtPlazo.Text),
-                            TipoAhorro = txtTipoAhorro.Text
-                        };
-
-
-                        Ahorro respuestaAhorro = await ahorroManager.Actualizar(ahorro, Session["Token"].ToString());
-
-                        if (!string.IsNullOrEmpty(respuestaAhorro.TipoAhorro))
-                        {
-                            lblResultado.Text = "Ahorro modificado con exito";
-                            lblResultado.Visible = true;
-                            lblResultado.ForeColor = Color.Green;
-                            btnAceptarMant.Visible = false;
-                            InicializarControles();
-
-                            ScriptManager.RegisterStartupScript(this,
-                        this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
-                        }
+                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
                     }
                 }
+                catch
+                {
+                    lblResultado.Text = "Hubo un error al efectuar la operacion";
+                    lblResultado.Visible = true;
+                    lblResultado.ForeColor = Color.Maroon;
+                }
             }
-            catch (Exception exc)
+            else // modificar
             {
-                lblStatus.Text = "Hubo un error en la operacion. " + exc.Message;
-                lblStatus.Visible = true;
+                try
+                {
+
+                    Ahorro ahorro = new Ahorro()
+                    {
+                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
+                        CuentaOrigen = Convert.ToInt32(txtCuentaOrigen.Text),
+                        Monto = Convert.ToInt32(txtMontoA.Text),
+                        Plazo = Convert.ToDecimal(txtPlazo.Text),
+                        TipoAhorro = txtTipoAhorro.Text
+                    };
+
+
+                    Ahorro respuestaAhorro = await ahorroManager.Actualizar(ahorro, Session["Token"].ToString());
+
+                    if (!string.IsNullOrEmpty(respuestaAhorro.TipoAhorro))
+                    {
+                        lblResultado.Text = "Ahorro modificado con exito";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Green;
+                        btnAceptarMant.Visible = false;
+                        InicializarControles();
+
+                        ScriptManager.RegisterStartupScript(this,
+                    this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                    }
+                    else
+                    {
+                        lblResultado.Text = "Hubo un error al efectuar la operacion";
+                        lblResultado.Visible = true;
+                        lblResultado.ForeColor = Color.Maroon;
+                    }
+                }
+                catch (Exception exc)
+                {
+                    lblStatus.Text = "Hubo un error en la operacion. " + exc.Message;
+                    lblStatus.Visible = true;
+                }
             }
         }
 
@@ -205,3 +225,4 @@ namespace AppWebInternetBanking.Views
     }
 
 }
+
