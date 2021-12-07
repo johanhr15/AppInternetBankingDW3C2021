@@ -11,16 +11,16 @@ namespace AppWebInternetBanking.Views
 {
 
 
-    public partial class frmReporteError
+    public partial class frmReporteCredito
     {
 
         /// <summary>
-        /// gvErrores control.
+        /// gvCredito control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvErrores;
+        protected global::System.Web.UI.WebControls.GridView gvCredito;
     }
 }

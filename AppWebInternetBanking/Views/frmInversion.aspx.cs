@@ -85,7 +85,6 @@ namespace AppWebInternetBanking.Views
                 {
                     Inversion inversiones = new Inversion()
                     {
-                        Codigo = Convert.ToInt32(txtCodigoMant.Text),
                         CuentaOrigen = Convert.ToInt32(ddlCuentaOrigen.SelectedValue),
                         FondosInversion = txtFondosInversion.Text,
                         Plazo = txtPlazo.Text,
@@ -175,12 +174,22 @@ namespace AppWebInternetBanking.Views
         protected void btnNuevo_Click(object sender, EventArgs e)
         {
             ltrTituloMantenimiento.Text = "Nueva Inversion";
-            lblResultado.Text = String.Empty;
-
-            LimpiarControles();
-
+            btnAceptarMant.ControlStyle.CssClass = "btn btn-sucess";
+            btnAceptarMant.Visible = true;
+            ltrCodigoMant.Visible = true;
+            txtCodigoMant.Visible = true;
+            ltrCuentaOrigen.Visible = true;
+            ddlCuentaOrigen.Visible = true;
+            ltrFondosInversion.Visible = true;
+            txtFondosInversion.Visible = true;
+            ltrPlazo.Visible = true;
+            txtPlazo.Visible = true;
+            ltrCodigoMoneda.Visible = true;
+            ddlCodigoMoneda.Visible = true;
+            ltrMonto.Visible = true;
+            txtMonto.Visible = true;
             ScriptManager.RegisterStartupScript(this,
-                 this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
+                this.GetType(), "LaunchServerSide", "$(function() {openModalMantenimiento(); } );", true);
         }
         private void LimpiarControles()
         {

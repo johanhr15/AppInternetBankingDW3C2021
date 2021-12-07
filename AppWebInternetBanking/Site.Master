@@ -12,7 +12,7 @@
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
@@ -83,6 +83,8 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bitacoras
                 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="/Views/frmReporteCredito.aspx">Creditos</a></li>
+                            <li><a href="/Views/frmReportePensiones.aspx">Traslado Pensiones</a></li>
                             <li><a href="/Views/frmReporteError.aspx">Errores</a></li>
                             <li><a href="/Views/frmReporteSesion.aspx">Sesiones</a></li>
                             <li><a href="/Views/frmReporteEstadistica.aspx">Estadisticas</a></li>

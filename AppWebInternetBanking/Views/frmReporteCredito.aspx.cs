@@ -11,10 +11,10 @@ using System.Web.UI.WebControls;
 
 namespace AppWebInternetBanking.Views
 {
-    public partial class frmReporteError : System.Web.UI.Page
+    public partial class frmReporteCredito : System.Web.UI.Page
     {
-        IEnumerable<Error> errores = new ObservableCollection<Error>();
-        ErrorManager errorManager = new ErrorManager();
+        IEnumerable<Credito> Creditos = new ObservableCollection<Credito>();
+        CreditoManager CreditoManager = new CreditoManager();
 
         public string labelsGrafico = string.Empty;
         public string backgroundcolorsGrafico = string.Empty;
@@ -27,7 +27,7 @@ namespace AppWebInternetBanking.Views
                     Response.Redirect("~/Login.aspx");
                 else
                 {
-                    errores = await errorManager.ObtenerErrores();
+                    Creditos = await CreditoManager.ObtenerCreditos(Session["Token"].ToString());
                     InicializarControles();
                     ObtenerDatosgrafico();
                 }
@@ -42,21 +42,21 @@ namespace AppWebInternetBanking.Views
 
             var random = new Random();
 
-            foreach (var error in errores.GroupBy(e => e.Vista).
+            foreach (var Credito in Creditos.GroupBy(e => e.CRE_BANCO).
                 Select(group => new
                 {
-                    Vista = group.Key,
+                    CRE_BANCO = group.Key,
                     Cantidad = group.Count()
-                }).OrderBy(x => x.Vista))
+                }).OrderBy(x => x.CRE_BANCO))
             {
-                string color = String.Format("#{0:X6}",random.Next(0x1000000));
-                labels.Append(string.Format("'{0}',", error.Vista));
-                data.Append(string.Format("'{0}',", error.Cantidad));
+                string color = String.Format("#{0:X6}", random.Next(0x1000000));
+                labels.Append(string.Format("'{0}',", Credito.CRE_BANCO));
+                data.Append(string.Format("'{0}',", Credito.Cantidad));
                 backgroundColors.Append(string.Format("'{0}',", color));
 
                 labelsGrafico = labels.ToString().Substring(0, labels.Length - 1);
                 dataGrafico = data.ToString().Substring(0, data.Length - 1);
-                backgroundcolorsGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1); 
+                backgroundcolorsGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1);
             }
 
         }
@@ -65,8 +65,8 @@ namespace AppWebInternetBanking.Views
         {
             try
             {
-                gvErrores.DataSource = errores.ToList();
-                gvErrores.DataBind();
+                gvCredito.DataSource = Creditos.ToList();
+                gvCredito.DataBind();
             }
             catch (Exception)
             {

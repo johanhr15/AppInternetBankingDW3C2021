@@ -11,7 +11,8 @@ namespace API.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using Newtonsoft.Json;
+
     public partial class Error
     {
         public int Codigo { get; set; }
@@ -22,7 +23,7 @@ namespace API.Models
         public string Descripcion { get; set; }
         public string Vista { get; set; }
         public string Accion { get; set; }
-    
+        [JsonIgnore]
         public virtual Usuario Usuario { get; set; }
     }
 }

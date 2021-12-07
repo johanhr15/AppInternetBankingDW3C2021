@@ -19,7 +19,7 @@ namespace AppWebInternetBanking
 
         protected async void btnAceptar_Click(object sender, EventArgs e)
         {
-            if(Page.IsValid)
+            if (Page.IsValid)
             {
                 try
                 {
@@ -29,7 +29,7 @@ namespace AppWebInternetBanking
 
                     usuario = await usuarioManager.Autenticar(loginRequest);
 
-                    if(usuario != null)
+                    if (usuario != null)
                     {
                         Session["CodigoUsuario"] = usuario.Codigo;
                         Session["Identificacion"] = usuario.Identificacion;

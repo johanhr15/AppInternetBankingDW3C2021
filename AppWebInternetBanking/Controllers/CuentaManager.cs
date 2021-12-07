@@ -67,14 +67,13 @@ namespace AppWebInternetBanking.Controllers
                 Content.ReadAsStringAsync());
         }
 
-        public async Task<Cuenta> Eliminar(string id, string token)
+        public async Task<string> Eliminar(string codigo, string token)
         {
             HttpClient httpClient = GetClient(token);
 
-            var response = await httpClient.DeleteAsync(string.Concat(UrlBase, id));
+            var response = await httpClient.DeleteAsync(string.Concat(UrlBase, codigo));
 
-            return JsonConvert.DeserializeObject<Cuenta>(await
-                response.Content.ReadAsStringAsync());
+            return JsonConvert.DeserializeObject<string>(await response.Content.ReadAsStringAsync());
         }
     }
 }

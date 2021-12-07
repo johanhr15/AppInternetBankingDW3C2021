@@ -66,7 +66,16 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.12.2\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -202,8 +211,10 @@
     <Content Include="Views\frmMarchamo.aspx" />
     <Content Include="Views\frmMoneda.aspx" />
     <Content Include="Views\frmPago.aspx" />
+    <Content Include="Views\frmReporteCredito.aspx" />
     <Content Include="Views\frmReporteError.aspx" />
     <Content Include="Views\frmReporteEstadistica.aspx" />
+    <Content Include="Views\frmReportePensiones.aspx" />
     <Content Include="Views\frmReporteSesion.aspx" />
     <Content Include="Views\frmServicio.aspx" />
     <Content Include="Views\frmSolTarjetaCredito.aspx" />
@@ -377,6 +388,13 @@
     <Compile Include="Views\frmPago.aspx.designer.cs">
       <DependentUpon>frmPago.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmReporteCredito.aspx.cs">
+      <DependentUpon>frmReporteCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReporteCredito.aspx.designer.cs">
+      <DependentUpon>frmReporteCredito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmReporteError.aspx.cs">
       <DependentUpon>frmReporteError.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -390,6 +408,13 @@
     </Compile>
     <Compile Include="Views\frmReporteEstadistica.aspx.designer.cs">
       <DependentUpon>frmReporteEstadistica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmReportePensiones.aspx.cs">
+      <DependentUpon>frmReportePensiones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReportePensiones.aspx.designer.cs">
+      <DependentUpon>frmReportePensiones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmReporteSesion.aspx.cs">
       <DependentUpon>frmReporteSesion.aspx</DependentUpon>

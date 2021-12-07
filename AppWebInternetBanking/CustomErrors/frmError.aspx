@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="frmError.aspx.cs" Inherits="AppWebInternetBanking.CustomErrors.frmError" %>
+﻿<%@ Page Async="true" Language="C#" AutoEventWireup="true" CodeBehind="frmError.aspx.cs" Inherits="AppWebInternetBanking.CustomErrors.frmError" %>
 
 <!DOCTYPE html>
 

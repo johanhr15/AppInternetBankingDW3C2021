@@ -1,4 +1,4 @@
-﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmReporteError.aspx.cs" Inherits="AppWebInternetBanking.Views.frmReporteError" %>
+﻿<%@ Page Async="true" Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmReportePensiones.aspx.cs" Inherits="AppWebInternetBanking.Views.frmReportePensiones" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
@@ -11,33 +11,30 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
-        $('[id*=gvErrores]').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
+        $('[id*=gvPensiones]').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
             dom: 'Bfrtip',
             'aoColumnDefs': [{ 'bSortable': true, 'aTargets': [0] }],
             'iDisplayLength': 20,
             buttons: [
                 { extend: 'copy', text: 'Copy to clipboard', className: 'exportExcel', exportOptions: { modifier: { page: 'all' } } },
-                { extend: 'excel', text: 'Export to Excel', className: 'exportExcel', filename: 'Errores_Excel', exportOptions: { modifier: { page: 'all' } } },
-                { extend: 'csv', text: 'Export to CSV', className: 'exportExcel', filename: 'Errores_Csv', exportOptions: { modifier: { page: 'all' } } },
-                { extend: 'pdf', text: 'Export to PDF', className: 'exportExcel', filename: 'Errores_Pdf', orientation: 'landscape', pageSize: 'LEGAL', exportOptions: { modifier: { page: 'all' }, columns: ':visible' } }
+                { extend: 'excel', text: 'Export to Excel', className: 'exportExcel', filename: 'Pensiones_Excel', exportOptions: { modifier: { page: 'all' } } },
+                { extend: 'csv', text: 'Export to CSV', className: 'exportExcel', filename: 'Pensiones_Csv', exportOptions: { modifier: { page: 'all' } } },
+                { extend: 'pdf', text: 'Export to PDF', className: 'exportExcel', filename: 'Pensiones_Pdf', orientation: 'landscape', pageSize: 'LEGAL', exportOptions: { modifier: { page: 'all' }, columns: ':visible' } }
             ]
         });
     });
     </script>
     
-    <h1>Bitacora de errores</h1>
-    <asp:GridView ID="gvErrores" runat="server" AutoGenerateColumns="false" CssClass="table table-sm"
+    <h1>Bitacora de Traslado de Pensiones</h1>
+    <asp:GridView ID="gvPensiones" runat="server" AutoGenerateColumns="false" CssClass="table table-sm"
        HeaderStyle-BackColor="Navy" HeaderStyle-ForeColor="White" AlternatingRowStyle-BackColor="LightBlue" >
         <Columns>
-            <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
-            <asp:BoundField HeaderText="CodigoUsuario" DataField="Codigousuario" />
-            <asp:BoundField HeaderText="FechaHora" DataField="FechaHora" DataFormatString="{0:dd/MM/yyyy}" 
-                ItemStyle-Wrap="false" ItemStyle-HorizontalAlign="Center" /> 
-            <asp:BoundField HeaderText="Fuente" DataField="Fuente" />
-            <asp:BoundField HeaderText="Numero" DataField="Numero" />
-            <asp:BoundField HeaderText="Descripcion" DataField="Descripcion" />
-            <asp:BoundField HeaderText="Vista" DataField="Vista" />
-            <asp:BoundField HeaderText="Accion" DataField="Accion" />
+            <asp:BoundField HeaderText="Codigo" DataField="TRAS_CODIGO" />
+            <asp:BoundField HeaderText="Cliente" DataField="TRAS_CLIENTE" />
+            <asp:BoundField HeaderText="Correo" DataField="TRAS_CLIENTE_CORREO" />
+            <asp:BoundField HeaderText="Telefono" DataField="TRAS_CLIENTE_TELEFONO" />
+            <asp:BoundField HeaderText="Entidad de Destino (ROP)" DataField="TRAS_ROP_DESTINO" />
+            <asp:BoundField HeaderText="Entidad de Destino (FCL)" DataField="TRAS_FCL_DESTINO" />
         </Columns>
     </asp:GridView>
 
@@ -52,7 +49,7 @@
                       data: {
                           labels: [<%= this.labelsGrafico %>],
                           datasets: [{
-                              label: "Errores por vista",
+                              label: "Cantidad de Traslados de FCL por Operadora de Pensiones",
                               backgroundColor: [<%= this.backgroundcolorsGrafico %>],
                             data: [<%= this.dataGrafico %>]
                           }]
@@ -60,7 +57,7 @@
                       options: {
                           title: {
                               display: true,
-                              text: 'Errores por vista'
+                              text: 'Cantidad de Traslados de FCL por Operadora de Pensiones'
                           }
                       }
                   });

@@ -10,20 +10,20 @@ namespace AppWebInternetBanking.CustomErrors
 {
     public partial class frmError : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        async protected void Page_Load(object sender, EventArgs e)
         {
             Exception err = Session["LastError"] as Exception;
 
-            if(err != null)
+            if (err != null)
             {
                 err = err.GetBaseException();
                 lblError.Text = err.Message;
                 Session["LastError"] = null;
-                /*
+
                 ErrorManager errorManager = new ErrorManager();
                 Error errorApi = new Error()
                 {
-                    CodigoUsuario = 0,
+                    CodigoUsuario = Convert.ToInt32(Session["CodigoUsuario"].ToString()),
                     FechaHora = DateTime.Now,
                     Vista = "frmError.aspx",
                     Accion = "Page_load",
@@ -32,7 +32,7 @@ namespace AppWebInternetBanking.CustomErrors
                     Descripcion = err.Message
                 };
 
-                Error errorIngresado = await errorManager.Ingresar(errorApi); */
+                Error errorIngresado = await errorManager.Ingresar(errorApi);
             }
         }
     }
