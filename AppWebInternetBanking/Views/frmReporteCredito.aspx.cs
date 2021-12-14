@@ -27,20 +27,33 @@ namespace AppWebInternetBanking.Views
                     Response.Redirect("~/Login.aspx");
                 else
                 {
-                    Creditos = await CreditoManager.ObtenerCreditos(Session["Token"].ToString());
                     InicializarControles();
                     ObtenerDatosgrafico();
                 }
             }
         }
 
-        private void ObtenerDatosgrafico()
+        private async void ObtenerDatosgrafico()
         {
             StringBuilder labels = new StringBuilder();
             StringBuilder data = new StringBuilder();
             StringBuilder backgroundColors = new StringBuilder();
 
             var random = new Random();
+            List<string> colores = new List<string>();
+            colores.Add("green");
+            colores.Add("blue");
+            colores.Add("orange");
+            colores.Add("red");
+            colores.Add("gray");
+            colores.Add("purple");
+            colores.Add("pink");
+            colores.Add("yellow");
+            colores.Add("black");
+            colores.Add("white");
+
+            int i = 0;
+            Creditos = await CreditoManager.ObtenerCreditos(Session["Token"].ToString());
 
             foreach (var Credito in Creditos.GroupBy(e => e.CRE_BANCO).
                 Select(group => new
@@ -49,22 +62,23 @@ namespace AppWebInternetBanking.Views
                     Cantidad = group.Count()
                 }).OrderBy(x => x.CRE_BANCO))
             {
-                string color = String.Format("#{0:X6}", random.Next(0x1000000));
+                /* string color = (string.Format("'{0}',", ahorros.TipoAhorro));*/
                 labels.Append(string.Format("'{0}',", Credito.CRE_BANCO));
                 data.Append(string.Format("'{0}',", Credito.Cantidad));
-                backgroundColors.Append(string.Format("'{0}',", color));
+                backgroundColors.Append(string.Format("'{0}',", colores.ElementAt(i)));
 
                 labelsGrafico = labels.ToString().Substring(0, labels.Length - 1);
                 dataGrafico = data.ToString().Substring(0, data.Length - 1);
-                backgroundcolorsGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1);
+                backgroundcolorsGrafico = backgroundColors.ToString().Substring(0, backgroundColors.Length - 1);
+                i++;
             }
-
         }
 
-        private void InicializarControles()
+        private async void InicializarControles()
         {
             try
             {
+                Creditos = await CreditoManager.ObtenerCreditos(Session["Token"].ToString());
                 gvCredito.DataSource = Creditos.ToList();
                 gvCredito.DataBind();
             }
