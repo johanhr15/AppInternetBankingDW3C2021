@@ -67,6 +67,8 @@
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bitacoras
                 <span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="/Views/frmReporteCertificadoDeposito.aspx">Certificados de Deposito</a></li>
+                            <li><a href="/Views/frmReporteSolicitudCompraCasa.aspx">Solicitudes de Compra de Casa</a></li>
                             <li><a href="/Views/frmReporteCredito.aspx">Creditos</a></li>
                             <li><a href="/Views/frmReportePensiones.aspx">Traslado Pensiones</a></li>
                             <li><a href="/Views/frmInversiones.aspx">Inversiones</a></li>
