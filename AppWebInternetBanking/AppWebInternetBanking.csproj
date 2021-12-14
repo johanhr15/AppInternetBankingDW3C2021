@@ -214,8 +214,10 @@
     <Content Include="Views\frmReporteCredito.aspx" />
     <Content Include="Views\frmReporteError.aspx" />
     <Content Include="Views\frmReporteEstadistica.aspx" />
+    <Content Include="Views\frmReporteMarchamos.aspx" />
     <Content Include="Views\frmReportePensiones.aspx" />
     <Content Include="Views\frmReporteSesion.aspx" />
+    <Content Include="Views\frmReporteTarjetas.aspx" />
     <Content Include="Views\frmServicio.aspx" />
     <Content Include="Views\frmSolTarjetaCredito.aspx" />
     <Content Include="Views\frmSolicitudCompraCasa.aspx" />
@@ -409,6 +411,13 @@
     <Compile Include="Views\frmReporteEstadistica.aspx.designer.cs">
       <DependentUpon>frmReporteEstadistica.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmReporteMarchamos.aspx.cs">
+      <DependentUpon>frmReporteMarchamos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReporteMarchamos.aspx.designer.cs">
+      <DependentUpon>frmReporteMarchamos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmReportePensiones.aspx.cs">
       <DependentUpon>frmReportePensiones.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -422,6 +431,13 @@
     </Compile>
     <Compile Include="Views\frmReporteSesion.aspx.designer.cs">
       <DependentUpon>frmReporteSesion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmReporteTarjetas.aspx.cs">
+      <DependentUpon>frmReporteTarjetas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReporteTarjetas.aspx.designer.cs">
+      <DependentUpon>frmReporteTarjetas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmServicio.aspx.cs">
       <DependentUpon>frmServicio.aspx</DependentUpon>

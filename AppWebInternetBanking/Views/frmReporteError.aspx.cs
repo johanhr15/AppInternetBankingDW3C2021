@@ -1,4 +1,4 @@
-﻿using AppWebInternetBanking.Controllers;
+using AppWebInternetBanking.Controllers;
 using AppWebInternetBanking.Models;
 using System;
 using System.Collections.Generic;
