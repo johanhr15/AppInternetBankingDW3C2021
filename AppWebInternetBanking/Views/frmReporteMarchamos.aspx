@@ -26,9 +26,9 @@
     });
     </script>
     
-    <h1>Bitacora de errores</h1>
-    <asp:GridView ID="gvMarchamos" runat="server" AutoGenerateColumns="false" CssClass="table table-sm"
-       HeaderStyle-BackColor="Navy" HeaderStyle-ForeColor="White" AlternatingRowStyle-BackColor="LightBlue" >
+    <h1>Bitacora de Marchamos</h1>
+    <asp:GridView ID="gvMarchamos" runat="server" AutoGenerateColumns="false" CssClass="table table-dark table-striped"
+       HeaderStyle-BackColor="#355B75" HeaderStyle-ForeColor="White" AlternatingRowStyle-BackColor="#869CAC" >
         <Columns>
              <asp:BoundField HeaderText="Codigo" DataField="idMarchamo" />
             <asp:BoundField HeaderText="Placa" DataField="idPlaca" />
@@ -44,7 +44,7 @@
 
      <div class="row">
             <div class="col-sm">
-     <div id="canvas-holder" style="width:40%">
+     <div id="canvas-holder" style=" text-align  width:40%  ">
 		            <canvas id="vistas-chart"></canvas>
 	            </div>
               <script >

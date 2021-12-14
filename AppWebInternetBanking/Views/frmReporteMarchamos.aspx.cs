@@ -44,17 +44,30 @@ namespace AppWebInternetBanking.Views
             StringBuilder backgroundColors = new StringBuilder();
 
             var random = new Random();
+            List<string> colores = new List<string>();
+            colores.Add("green");
+            colores.Add("blue");
+            colores.Add("orange");
+            colores.Add("red");
+            colores.Add("gray");
+            colores.Add("purple");
+            colores.Add("pink");
+            colores.Add("yellow");
+            colores.Add("black");
+            colores.Add("white");
 
             foreach  (var error in marchamos)
             {
-                string color = String.Format("#{0:X6}", random.Next(0x1000000));
+               // string color = String.Format("#{0:X6}", random.Next(0x1000000));
                 labels.Append(string.Format("'{0}',", error.idPlaca));
                 data.Append(string.Format("'{0}',", Convert.ToInt32(error.monto)));
-                backgroundColors.Append(string.Format("'{0}',", color));
+                backgroundColors.Append(string.Format("'{0}',", colores.ElementAt(random.Next(9))));
 
                 etiquetasGrafico = labels.ToString().Substring(0, labels.Length - 1);
                 informacionGrafico = data.ToString().Substring(0, data.Length - 1);
-                coloresGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1);
+                // coloresGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1);
+                coloresGrafico = backgroundColors.ToString().Substring(0, backgroundColors.Length - 1);
+
             }
 
         }

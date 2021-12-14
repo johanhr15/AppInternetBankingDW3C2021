@@ -20,17 +20,17 @@
             'iDisplayLength': 20,
             buttons: [
                 { extend: 'copy', text: 'Copiar a portapapeles', className: 'exportExcel', exportOptions: { modifier: { page: 'all' } } },
-                { extend: 'excel', text: 'Exportar a Excel', className: 'exportExcel', filename: 'Marchamos_Excel', exportOptions: { modifier: { page: 'all' } } },
-                { extend: 'csv', text: 'Exportar a CSV', className: 'exportExcel', filename: 'Marchamos_Csv', exportOptions: { modifier: { page: 'all' } } },
-                { extend: 'pdf', text: 'Exportar a PDF', className: 'exportExcel', filename: 'Marchamos_Pdf', orientation: 'landscape', pageSize: 'LEGAL', exportOptions: { modifier: { page: 'all' }, columns: ':visible' } }
+                { extend: 'excel', text: 'Exportar a Excel', className: 'exportExcel', filename: 'Tarjetas_Excel', exportOptions: { modifier: { page: 'all' } } },
+                { extend: 'csv', text: 'Exportar a CSV', className: 'exportExcel', filename: 'Tarjetas_Csv', exportOptions: { modifier: { page: 'all' } } },
+                { extend: 'pdf', text: 'Exportar a PDF', className: 'exportExcel', filename: 'Tarjetas_Pdf', orientation: 'landscape', pageSize: 'LEGAL', exportOptions: { modifier: { page: 'all' }, columns: ':visible' } }
             ]
         });
     });
     </script>
     
     <h1>Tarjetas</h1>
-    <asp:GridView ID="gvTarjetas" runat="server" AutoGenerateColumns="false" CssClass="table table-sm"
-       HeaderStyle-BackColor="Navy" HeaderStyle-ForeColor="White" AlternatingRowStyle-BackColor="LightBlue" >
+    <asp:GridView ID="gvTarjetas" runat="server" AutoGenerateColumns="false" CssClass="table table-dark table-striped"
+       HeaderStyle-BackColor="#355B75" HeaderStyle-ForeColor="White" AlternatingRowStyle-BackColor="#869CAC" >
         <Columns>
         <asp:BoundField HeaderText="Codigo" DataField="idSolTarjeta" />
             <asp:BoundField HeaderText="Cliente" DataField="cedula" />

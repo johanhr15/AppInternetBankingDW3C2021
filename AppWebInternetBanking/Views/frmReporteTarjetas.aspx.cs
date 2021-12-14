@@ -43,7 +43,7 @@ namespace AppWebInternetBanking.Views
             StringBuilder data = new StringBuilder();
             StringBuilder backgroundColors = new StringBuilder();
 
-            var random = new Random();
+
 
 
             foreach (var tarjeta in tarjetas.GroupBy(e => e.idTipoTarjeta).
@@ -53,16 +53,30 @@ namespace AppWebInternetBanking.Views
                     Cantidad = group.Count()
                 }).OrderBy(x => x.TipoTarjeta))
             {
-                string color = String.Format("#{0:X6}", random.Next(0x1000000));
+                var random = new Random();
+                List<string> colores = new List<string>();
+                colores.Add("green");
+                colores.Add("blue");
+                colores.Add("orange");
+                colores.Add("red");
+                colores.Add("gray");
+                colores.Add("purple");
+                colores.Add("pink");
+                colores.Add("yellow");
+                colores.Add("black");
+                colores.Add("white");
 
 
-                    labels.Append(string.Format("'{0}',", tarjeta.TipoTarjeta));
-                    data.Append(string.Format("'{0}',", tarjeta.Cantidad));
-                backgroundColors.Append(string.Format("'{0}',", color));
+                //string color = String.Format("#{0:X6}", random.Next(0x1000000));
+                labels.Append(string.Format("'{0}',", tarjeta.TipoTarjeta));
+                data.Append(string.Format("'{0}',", tarjeta.Cantidad));
+                //backgroundColors.Append(string.Format("'{0}',", color));
+                backgroundColors.Append(string.Format("'{0}',", colores.ElementAt(random.Next(9))));
 
                 etiquetasGrafico = labels.ToString().Substring(0, labels.Length - 1);
                 informacionGrafico = data.ToString().Substring(0, data.Length - 1);
-                coloresGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1);
+               // coloresGrafico = backgroundColors.ToString().Substring(backgroundColors.Length - 1);
+                coloresGrafico = backgroundColors.ToString().Substring(0, backgroundColors.Length - 1);
             }
 
         }

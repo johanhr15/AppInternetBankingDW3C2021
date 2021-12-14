@@ -38,8 +38,7 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
-        <nav class="navbar navbar-inverse bg-dark" >
+        <nav class="navbar navbar-inverse bg-primary" >
             <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand">Bienvenido: <asp:Literal runat="server" ID="ltrNombre"></asp:Literal> </a>
@@ -63,22 +62,7 @@
                             <li><a href="/Views/frmMoneda.aspx">Monedas</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Procesos
-                <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Transferencias</a></li>
-                            <li><a href="#">Pagos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Reportes
-                <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Transferencias</a></li>
-                            <li><a href="#">Pagos</a></li>
-                        </ul>
-                    </li>
+      
                     <li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Bitacoras
                 <span class="caret"></span></a>
@@ -90,6 +74,8 @@
                             <li><a href="/Views/frmReporteError.aspx">Errores</a></li>
                             <li><a href="/Views/frmReporteSesion.aspx">Sesiones</a></li>
                             <li><a href="/Views/frmReporteEstadistica.aspx">Estadisticas</a></li>
+                            <li><a href="/Views/frmReporteMarchamos.aspx">Marchamos</a></li>
+                            <li><a href="/Views/frmReporteTarjetas.aspx">Tarjetas</a></li>
                         </ul>
                     </li>
                     <li>
