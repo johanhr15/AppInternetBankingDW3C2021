@@ -85,6 +85,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="/Views/frmReporteCredito.aspx">Creditos</a></li>
                             <li><a href="/Views/frmReportePensiones.aspx">Traslado Pensiones</a></li>
+                            <li><a href="/Views/frmInversiones.aspx">Inversiones</a></li>
+                            <li><a href="/Views/frmAhorros.aspx">Ahorros</a></li>
                             <li><a href="/Views/frmReporteError.aspx">Errores</a></li>
                             <li><a href="/Views/frmReporteSesion.aspx">Sesiones</a></li>
                             <li><a href="/Views/frmReporteEstadistica.aspx">Estadisticas</a></li>
