@@ -213,12 +213,14 @@
     <Content Include="Views\frmMarchamo.aspx" />
     <Content Include="Views\frmMoneda.aspx" />
     <Content Include="Views\frmPago.aspx" />
+    <Content Include="Views\frmReporteCertificadoDeposito.aspx" />
     <Content Include="Views\frmReporteCredito.aspx" />
     <Content Include="Views\frmReporteError.aspx" />
     <Content Include="Views\frmReporteEstadistica.aspx" />
     <Content Include="Views\frmReporteMarchamos.aspx" />
     <Content Include="Views\frmReportePensiones.aspx" />
     <Content Include="Views\frmReporteSesion.aspx" />
+    <Content Include="Views\frmReporteSolicitudCompraCasa.aspx" />
     <Content Include="Views\frmReporteTarjetas.aspx" />
     <Content Include="Views\frmServicio.aspx" />
     <Content Include="Views\frmSolTarjetaCredito.aspx" />
@@ -407,6 +409,13 @@
     <Compile Include="Views\frmPago.aspx.designer.cs">
       <DependentUpon>frmPago.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\frmReporteCertificadoDeposito.aspx.cs">
+      <DependentUpon>frmReporteCertificadoDeposito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReporteCertificadoDeposito.aspx.designer.cs">
+      <DependentUpon>frmReporteCertificadoDeposito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\frmReporteCredito.aspx.cs">
       <DependentUpon>frmReporteCredito.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -448,6 +457,13 @@
     </Compile>
     <Compile Include="Views\frmReporteSesion.aspx.designer.cs">
       <DependentUpon>frmReporteSesion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\frmReporteSolicitudCompraCasa.aspx.cs">
+      <DependentUpon>frmReporteSolicitudCompraCasa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\frmReporteSolicitudCompraCasa.aspx.designer.cs">
+      <DependentUpon>frmReporteSolicitudCompraCasa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\frmReporteTarjetas.aspx.cs">
       <DependentUpon>frmReporteTarjetas.aspx</DependentUpon>
